@@ -45,7 +45,7 @@ export async function openCashfreeCheckout(paymentSessionId: string, callbacks?:
     throw new Error('Cashfree SDK not available')
   }
 
-  const sdkMode = getCashfreeMode() === 'production' ? 'PROD' : 'TEST'
+  const sdkMode = getCashfreeMode()
 
   let instance: any
   const initializer: any = window.Cashfree
@@ -78,6 +78,7 @@ export async function openCashfreeCheckout(paymentSessionId: string, callbacks?:
           : null
 
   if (!launch) {
+    console.error('Cashfree instance received:', instance)
     throw new Error('Cashfree checkout function not available on instance')
   }
 
