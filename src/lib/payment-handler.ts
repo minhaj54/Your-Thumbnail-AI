@@ -71,14 +71,14 @@ export async function openCashfreeCheckout(paymentSessionId: string, callbacks?:
   const launch =
     typeof instance.checkout === 'function'
       ? instance.checkout.bind(instance)
-      : typeof instance.doPayment === 'function'
-        ? instance.doPayment.bind(instance)
+    : typeof instance.doPayment === 'function'
+      ? instance.doPayment.bind(instance)
       : typeof instance.makePayment === 'function'
         ? instance.makePayment.bind(instance)
-        : typeof instance.drop === 'function'
-          ? instance.drop.bind(instance)
-          : typeof instance.redirect === 'function'
-            ? instance.redirect.bind(instance)
+        : typeof instance.redirect === 'function'
+          ? instance.redirect.bind(instance)
+          : typeof instance.drop === 'function'
+            ? instance.drop.bind(instance)
             : typeof instance.elements === 'function'
               ? instance.elements.bind(instance)
               : null
