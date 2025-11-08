@@ -1380,18 +1380,18 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
               {/* Generate Button */}
               <button
                 onClick={handleGenerate}
-                disabled={isGenerating || (mode === 'create' && !prompt.trim()) || (mode === 'clone' && (!cloneUrl.trim() || !prompt.trim()))}
+                disabled={isGenerating || !prompt.trim()}
                 className="btn btn-primary btn-lg w-full"
               >
                 {isGenerating ? (
                   <>
                     <RefreshCw className="mr-2 h-5 w-5 animate-spin" />
-                    {mode === 'clone' ? 'Cloning & Modifying...' : `Generating ${generateVariants ? '3 Variants' : 'Thumbnail'}...`}
+                    {`Generating ${generateVariants ? '3 Variants' : 'Thumbnail'}...`}
                   </>
                 ) : (
                   <>
-                    {mode === 'clone' ? <Copy className="mr-2 h-5 w-5" /> : <Sparkles className="mr-2 h-5 w-5" />}
-                    {mode === 'clone' ? 'Clone & Modify Thumbnail' : `Generate ${generateVariants ? '3 Variants' : 'Thumbnail'}`}
+                    <Sparkles className="mr-2 h-5 w-5" />
+                    {`Generate ${generateVariants ? '3 Variants' : 'Thumbnail'}`}
                   </>
                 )}
               </button>
