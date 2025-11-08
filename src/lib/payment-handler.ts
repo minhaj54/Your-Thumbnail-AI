@@ -41,51 +41,71 @@ declare global {
 export async function openCashfreeCheckout(paymentSessionId: string, callbacks?: CashfreeCallbacks) {
   await loadCashfreeScript()
 
-  return new Promise((resolve, reject) => {
-    if (!window.Cashfree) {
-      reject(new Error('Cashfree SDK not available'))
-      return
+  if (!window.Cashfree) {
+    throw new Error('Cashfree SDK not available')
+  }
+
+  const sdkMode = getCashfreeMode() === 'production' ? 'PROD' : 'TEST'
+
+  let instance: any
+  const initializer: any = window.Cashfree
+
+  try {
+    instance = initializer({ mode: sdkMode })
+  } catch (err) {
+    try {
+      instance = new initializer({ mode: sdkMode })
+    } catch (innerErr) {
+      throw innerErr
     }
+  }
 
-    const sdkMode = getCashfreeMode() === 'production' ? 'PROD' : 'TEST'
+  if (instance && typeof instance.then === 'function') {
+    instance = await instance
+  }
 
-    Promise.resolve(window.Cashfree({ mode: sdkMode }))
-      .then((instance: any) => {
-        if (!instance) {
-          throw new Error('Cashfree checkout instance could not be initialized')
-        }
+  if (!instance) {
+    throw new Error('Cashfree checkout instance could not be initialized')
+  }
 
-        const launch =
-          typeof instance.checkout === 'function'
-            ? instance.checkout.bind(instance)
-            : typeof instance.doPayment === 'function'
-              ? instance.doPayment.bind(instance)
-              : null
+  const launch =
+    typeof instance.checkout === 'function'
+      ? instance.checkout.bind(instance)
+      : typeof instance.doPayment === 'function'
+        ? instance.doPayment.bind(instance)
+        : typeof instance.makePayment === 'function'
+          ? instance.makePayment.bind(instance)
+          : null
 
-        if (!launch) {
-          throw new Error('Cashfree checkout function not available')
-        }
+  if (!launch) {
+    throw new Error('Cashfree checkout function not available on instance')
+  }
 
-        launch(
-          {
-            paymentSessionId,
-            redirectTarget: '_self',
+  return new Promise((resolve, reject) => {
+    try {
+      const result = launch(
+        {
+          paymentSessionId,
+          redirectTarget: '_self',
+        },
+        {
+          onSuccess: (data: any) => {
+            callbacks?.onSuccess(data)
+            resolve(data)
           },
-          {
-            onSuccess: (data: any) => {
-              callbacks?.onSuccess(data)
-              resolve(data)
-            },
-            onFailure: (error: any) => {
-              callbacks?.onFailure(error)
-              reject(error)
-            },
-          }
-        )
-      })
-      .catch((error) => {
-        reject(error)
-      })
+          onFailure: (error: any) => {
+            callbacks?.onFailure(error)
+            reject(error)
+          },
+        }
+      )
+
+      if (result && typeof result.then === 'function') {
+        result.then(resolve).catch(reject)
+      }
+    } catch (error) {
+      reject(error)
+    }
   })
 }
 
