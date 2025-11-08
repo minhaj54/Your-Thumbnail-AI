@@ -68,28 +68,56 @@ export async function openCashfreeCheckout(paymentSessionId: string, callbacks?:
     throw new Error('Cashfree checkout instance could not be initialized')
   }
 
-  const launch =
-    typeof instance.checkout === 'function'
-      ? instance.checkout.bind(instance)
-    : typeof instance.doPayment === 'function'
-      ? instance.doPayment.bind(instance)
-      : typeof instance.makePayment === 'function'
-        ? instance.makePayment.bind(instance)
-        : typeof instance.redirect === 'function'
-          ? instance.redirect.bind(instance)
-          : typeof instance.drop === 'function'
-            ? instance.drop.bind(instance)
-            : typeof instance.elements === 'function'
-              ? instance.elements.bind(instance)
-              : null
+  let launch: ((config: any, callbacks?: any) => any) | null = null
+  let launchType: 'checkout' | 'doPayment' | 'makePayment' | 'redirect' | 'drop' | 'elements' | null = null
+
+  if (typeof instance.checkout === 'function') {
+    launch = instance.checkout.bind(instance)
+    launchType = 'checkout'
+  } else if (typeof instance.doPayment === 'function') {
+    launch = instance.doPayment.bind(instance)
+    launchType = 'doPayment'
+  } else if (typeof instance.makePayment === 'function') {
+    launch = instance.makePayment.bind(instance)
+    launchType = 'makePayment'
+  } else if (typeof instance.redirect === 'function') {
+    launch = instance.redirect.bind(instance)
+    launchType = 'redirect'
+  } else if (typeof instance.drop === 'function') {
+    launch = instance.drop.bind(instance)
+    launchType = 'drop'
+  } else if (typeof instance.elements === 'function') {
+    launch = instance.elements.bind(instance)
+    launchType = 'elements'
+  }
 
   if (!launch) {
     console.error('Cashfree instance received:', instance)
     throw new Error('Cashfree checkout function not available on instance')
   }
 
+  if (launchType === 'drop' || launchType === 'elements') {
+    throw new Error(
+      'Cashfree drop-in/elements integration requires additional configuration. Switch to redirect or checkout integration.'
+    )
+  }
+
   return new Promise((resolve, reject) => {
     try {
+      if (launchType === 'redirect') {
+        const result = launch({
+          paymentSessionId,
+          redirectTarget: '_self',
+        })
+
+        if (result && typeof result.then === 'function') {
+          result.then(resolve).catch(reject)
+        } else {
+          resolve(result)
+        }
+        return
+      }
+
       const result = launch(
         {
           paymentSessionId,
