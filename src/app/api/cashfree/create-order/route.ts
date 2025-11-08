@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
         customer_name: user.email?.split('@')[0] || 'Thumbnail AI User',
       },
       order_meta: {
-        return_url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/payments/cashfree-return?order_id={order_id}&cf_order_id={cf_order_id}`,
+        return_url: `${process.env.NEXT_PUBLIC_APP_URL || 'https://www.yourthumbnail.com'}/payments/cashfree-return?order_id={order_id}&cf_order_id={cf_order_id}`,
       },
       order_note: JSON.stringify(notes),
     })
