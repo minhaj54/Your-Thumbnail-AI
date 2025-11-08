@@ -47,24 +47,45 @@ export async function openCashfreeCheckout(paymentSessionId: string, callbacks?:
       return
     }
 
-    const cashfree = new window.Cashfree({ mode: getCashfreeMode() })
+    const sdkMode = getCashfreeMode() === 'production' ? 'PROD' : 'TEST'
 
-    cashfree.checkout(
-      {
-        paymentSessionId,
-        redirectTarget: '_self',
-      },
-      {
-        onSuccess: (data: any) => {
-          callbacks?.onSuccess(data)
-          resolve(data)
-        },
-        onFailure: (error: any) => {
-          callbacks?.onFailure(error)
-          reject(error)
-        },
-      }
-    )
+    Promise.resolve(window.Cashfree({ mode: sdkMode }))
+      .then((instance: any) => {
+        if (!instance) {
+          throw new Error('Cashfree checkout instance could not be initialized')
+        }
+
+        const launch =
+          typeof instance.checkout === 'function'
+            ? instance.checkout.bind(instance)
+            : typeof instance.doPayment === 'function'
+              ? instance.doPayment.bind(instance)
+              : null
+
+        if (!launch) {
+          throw new Error('Cashfree checkout function not available')
+        }
+
+        launch(
+          {
+            paymentSessionId,
+            redirectTarget: '_self',
+          },
+          {
+            onSuccess: (data: any) => {
+              callbacks?.onSuccess(data)
+              resolve(data)
+            },
+            onFailure: (error: any) => {
+              callbacks?.onFailure(error)
+              reject(error)
+            },
+          }
+        )
+      })
+      .catch((error) => {
+        reject(error)
+      })
   })
 }
 
