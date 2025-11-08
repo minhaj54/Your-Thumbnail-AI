@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { geminiImageGenerator, ImageGenerationOptions } from '@/lib/gemini'
 import { createServerSupabase } from '@/lib/supabase/server'
-import { canGenerate, deductCredits } from '@/lib/credits'
+import { getUserCredits, deductCredits } from '@/lib/auth'
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,15 +12,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // Check if user has credits
-    const { canGenerate: hasCredits, credits } = await canGenerate(session.user.id)
-    
-    if (!hasCredits) {
-      return NextResponse.json({ 
-        error: 'Insufficient credits',
-        credits: credits,
-        upgradeRequired: true
-      }, { status: 402 })
+    // Check if user has enough credits
+    const userCredits = await getUserCredits(session.user.id)
+    if (userCredits < 1) {
+      return NextResponse.json(
+        { error: 'Insufficient credits. Please purchase credits to continue generating thumbnails.' },
+        { status: 402 }
+      )
     }
 
     const formData = await request.formData()
@@ -96,22 +94,21 @@ The user has uploaded ${images.length} reference image(s) containing faces that 
 
     const options: ImageGenerationOptions = {
       prompt: finalPrompt,
-      style: style || 'professional',
-      aspectRatio: aspectRatio || '16:9',
-      size: size || 'medium',
-      quality: quality || 'high',
+      style: (style as 'realistic' | 'artistic' | 'minimalist' | 'vibrant' | 'professional') || 'professional',
+      aspectRatio: (aspectRatio as '16:9' | '1:1' | '4:3' | '9:16' | '21:9') || '16:9',
+      size: (size as 'small' | 'medium' | 'large') || 'medium',
+      quality: (quality as 'standard' | 'high') || 'high',
       imageData: imageData,
       userId: session.user.id
     }
 
     const result = await geminiImageGenerator.generateImage(options)
 
-    // Deduct credits after successful generation
-    const creditsDeducted = await deductCredits(session.user.id, 1)
-    
-    if (!creditsDeducted) {
-      console.error('Failed to deduct credits after generation')
-      // Don't fail the request as image was already generated
+    // Deduct 1 credit after successful generation
+    const creditDeducted = await deductCredits(session.user.id, 1)
+    if (!creditDeducted) {
+      console.error('Failed to deduct credits, but image was already generated')
+      // Still continue as image was generated successfully
     }
 
     // Store generation in database
@@ -138,8 +135,7 @@ The user has uploaded ${images.length} reference image(s) containing faces that 
 
     return NextResponse.json({
       success: true,
-      data: result,
-      credits_remaining: credits - 1
+      data: result
     })
 
   } catch (error) {

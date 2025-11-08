@@ -5,7 +5,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE public.users (
   id UUID REFERENCES auth.users(id) ON DELETE CASCADE PRIMARY KEY,
   email TEXT UNIQUE NOT NULL,
-  credits INTEGER DEFAULT 3 NOT NULL,
+  credits INTEGER DEFAULT 5 NOT NULL,
   subscription_tier TEXT DEFAULT 'free' CHECK (subscription_tier IN ('free', 'basic', 'pro', 'custom')),
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -115,7 +115,7 @@ CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
   INSERT INTO public.users (id, email, credits)
-  VALUES (NEW.id, NEW.email, 3);
+  VALUES (NEW.id, NEW.email, 5);
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;

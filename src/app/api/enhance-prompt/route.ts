@@ -21,46 +21,42 @@ export async function POST(request: NextRequest) {
           // Initialize Gemini model
           const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
 
-      // Create the enhancement prompt for Gemini
-      const enhancementPrompt = `You are an AI Prompt Enhancer designed to transform simple, vague, or unclear prompts into powerful, detailed, and creative ones that maximize quality, clarity, and relevance for text, image, or video generation models.
+      // Create the thumbnail-specific enhancement prompt for Gemini
+      const enhancementPrompt = `You are a YouTube Thumbnail Expert AI. Transform simple prompts into professional, detailed thumbnail descriptions that maximize click-through rates.
 
-Your goal is to:
-- Understand the user's original intent.
-- Expand it with vivid context, details, and purpose.
-- Improve grammar and phrasing.
-- Add creative and technical depth if needed.
-- Keep it concise yet powerful.
+Your enhanced prompts MUST follow this exact structure:
 
-Return only the improved prompt, not explanations.
+Main Subject: [Describe the main focus - people, objects, scenes. Include specific details like age, ethnicity, expressions, actions, clothing, positioning. Be vivid and specific.]
 
-Examples:
+Visual Style: [Lighting (natural/studio/dramatic), color palette (vibrant/muted/specific colors), mood (energetic/professional/mysterious), and technical quality (4K, sharp focus, etc.)]
 
-1️⃣
-User Prompt: "cat sitting on a chair"
-Improved Prompt: "A fluffy orange cat with bright green eyes sitting elegantly on a wooden chair near a sunny window, captured in soft natural light — ultra-realistic photography."
+Composition: [Camera angle (low-angle/eye-level/bird's-eye), shot type (close-up/medium/wide), subject positioning (rule of thirds, centered, left/right space), depth and focus]
 
-2️⃣
-User Prompt: "write a youtube video script about ai"
-Improved Prompt: "Write a captivating YouTube video script that explains how AI is changing daily life, starting with an engaging hook, relatable examples, and a motivational conclusion."
+Text Elements: [Specific text placement, font style (bold/outlined/3D), colors, size hierarchy, positioning (top/bottom/side), and exact wording suggestions that create urgency or curiosity]
 
-3️⃣
-User Prompt: "build a modern login ui in flutter"
-Improved Prompt: "Create a modern, responsive Flutter login UI featuring gradient backgrounds, smooth animations, rounded text fields, and a prominent 'Sign In' button — optimized for both mobile and web."
+Mood: [Overall emotional impact, target audience feeling, psychological triggers (curiosity/excitement/urgency/inspiration), and the key message conveyed]
 
-4️⃣
-User Prompt: "generate thumbnail for gaming video"
-Improved Prompt: "Create a high-impact YouTube thumbnail for a gaming video — featuring intense action, bold typography, vibrant contrast, and the player's expressive face in focus."
+Example Input: "tech review thumbnail"
 
-Remember:
-✅ Keep user's intent.
-✅ Add clarity, richness, and emotion.
-✅ Adapt to the context (text, image, code, design, etc.).
-✅ Never invent irrelevant details.
-✅ Output: only the final improved prompt.
+Example Output:
+Main Subject: A diverse tech reviewer (late 20s, casual but professional) holding the latest smartphone with an amazed, wide-eyed expression. The phone screen is glowing, casting light on their face. Modern tech setup visible in background with RGB lighting.
 
-User Prompt: "${prompt}"
+Visual Style: Studio lighting with dramatic blue and purple RGB accent lights. High contrast, vibrant colors emphasizing the tech product. Sharp 4K quality with slight bokeh background blur. Cool color temperature with warm highlights on face.
 
-Enhanced Prompt:`
+Composition: Medium close-up shot, slightly low-angle (eye-level tilted 10° up) making the reviewer appear authoritative. Subject positioned in left two-thirds of frame. Phone held prominently at chest level. Right third left empty for text overlay.
+
+Text Elements: Bold, white text with black outline at top-right: "BEST PHONE 2025?" in large caps. Below it, smaller yellow text: "INSANE Camera!" with slight glow effect. Bottom-right corner: Small red "HONEST REVIEW" badge. All text uses thick sans-serif font (Impact/Bebas).
+
+Mood: Excitement and trustworthy authority. Conveys genuine surprise and expert analysis. Creates curiosity ("What's so special?") and urgency ("I need to know this"). Appeals to tech enthusiasts aged 18-35 who value honest, energetic reviews.
+
+Now enhance this prompt with the same detailed structure:
+
+User's Basic Prompt: "${prompt}"
+
+Style Preference: ${style}
+Aspect Ratio: ${aspectRatio}
+
+Enhanced Thumbnail Prompt:`
 
       // Generate enhanced prompt using Gemini
       const result = await model.generateContent(enhancementPrompt)
@@ -105,26 +101,55 @@ Enhanced Prompt:`
   }
 }
 
-// Fallback enhancement function
+// Fallback enhancement function with structured format
 function fallbackEnhancement(originalPrompt: string, style: string, aspectRatio: string): string {
   const styleDescriptors = {
-    realistic: 'ultra-realistic photography with sharp focus and natural lighting',
-    artistic: 'creative artistic composition with unique visual flair and dynamic elements',
-    minimalist: 'clean minimalist design with elegant simplicity and strategic negative space',
-    vibrant: 'vibrant high-contrast imagery with bold colors and energetic composition',
-    professional: 'polished professional presentation with corporate-grade quality and clean aesthetics'
+    realistic: {
+      lighting: 'natural lighting with soft shadows',
+      quality: 'ultra-realistic photography, sharp focus, 4K quality',
+      colors: 'natural color palette with accurate skin tones'
+    },
+    artistic: {
+      lighting: 'dramatic lighting with creative shadows and highlights',
+      quality: 'artistic composition with painterly effects',
+      colors: 'vibrant, saturated colors with artistic color grading'
+    },
+    minimalist: {
+      lighting: 'clean, even lighting with minimal shadows',
+      quality: 'crisp, clean imagery with high clarity',
+      colors: 'muted color palette with strategic pops of color'
+    },
+    vibrant: {
+      lighting: 'bright, high-energy lighting with strong contrast',
+      quality: 'high-contrast, super vibrant, eye-catching quality',
+      colors: 'bold, saturated colors that demand attention'
+    },
+    professional: {
+      lighting: 'studio lighting with professional setup',
+      quality: 'polished, commercial-grade quality, sharp details',
+      colors: 'balanced color palette with professional color grading'
+    }
   }
 
-  const aspectRatioContext = {
-    '16:9': 'widescreen format perfect for YouTube thumbnails',
-    '1:1': 'square format ideal for social media posts and Instagram',
-    '4:3': 'traditional format great for presentations and web content',
-    '9:16': 'vertical format perfect for mobile stories and TikTok',
-    '21:9': 'ultra-wide cinematic format for premium displays'
+  const aspectRatioGuidance = {
+    '16:9': 'Horizontal widescreen composition. Subject positioned following rule of thirds with space for text on sides or top.',
+    '1:1': 'Square composition. Centered or slightly off-center subject with text overlay options on all sides.',
+    '4:3': 'Traditional horizontal format. Balanced composition with text placement flexibility.',
+    '9:16': 'Vertical mobile format. Subject in upper two-thirds with text space at bottom or overlaid.',
+    '21:9': 'Ultra-wide cinematic format. Epic composition with dramatic depth and side text placement.'
   }
 
-  const styleDesc = styleDescriptors[style as keyof typeof styleDescriptors] || styleDescriptors.professional
-  const aspectDesc = aspectRatioContext[aspectRatio as keyof typeof aspectRatioContext] || aspectRatioContext['16:9']
+  const styleConfig = styleDescriptors[style as keyof typeof styleDescriptors] || styleDescriptors.professional
+  const compositionGuide = aspectRatioGuidance[aspectRatio as keyof typeof aspectRatioGuidance] || aspectRatioGuidance['16:9']
 
-  return `Create a high-impact ${aspectDesc} thumbnail featuring ${originalPrompt} — designed with ${styleDesc}, bold typography space, vibrant contrast, and a clear focal point that demands attention and drives clicks.`
+  // Create structured enhancement
+  return `Main Subject: ${originalPrompt} - featuring dynamic subjects with engaging expressions and clear focus. Subjects positioned to create visual interest and leave space for text overlays.
+
+Visual Style: ${styleConfig.lighting}. ${styleConfig.colors}. ${styleConfig.quality}. High production value with professional finishing.
+
+Composition: ${compositionGuide} Eye-catching focal point with balanced elements. Strategic use of negative space for text and visual hierarchy.
+
+Text Elements: Bold, high-contrast typography with clear readability. Suggested placement: Primary text at top or bottom in large, attention-grabbing font (white with black outline or contrasting color). Secondary text in complementary colors. All text should create curiosity or urgency.
+
+Mood: Engaging and click-worthy. Creates immediate interest and compels viewers to click. Conveys professionalism, excitement, and value. Target audience will feel intrigued and motivated to engage with the content.`
 }

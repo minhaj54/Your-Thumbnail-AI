@@ -4,7 +4,7 @@
 
 1. **Node.js 18+** - Download from [nodejs.org](https://nodejs.org/)
 2. **Supabase Account** - Sign up at [supabase.com](https://supabase.com/)
-3. **Razorpay Account** - Sign up at [razorpay.com](https://razorpay.com/)
+3. **Cashfree Account** - Sign up at [cashfree.com](https://cashfree.com/)
 4. **Google Gemini API Key** - Get from [Google AI Studio](https://aistudio.google.com/)
 
 ## Setup Steps
@@ -17,11 +17,12 @@
 4. Run the SQL migration from `supabase/migrations/001_initial_schema.sql` in your Supabase SQL editor
 5. Go to Storage and create a bucket named `thumbnails` (public)
 
-### 2. Razorpay Setup
+### 2. Cashfree Setup
 
-1. Create a Razorpay account and get your test API keys
-2. Set up webhook endpoint: `https://yourdomain.com/api/razorpay/webhook`
-3. Enable webhook events: `payment.captured`, `payment.failed`, `order.paid`
+1. Create a Cashfree account and switch to the PG sandbox
+2. Create API keys from the Developer → Credentials section
+3. Set up webhook endpoint: `https://yourdomain.com/api/cashfree/webhook`
+4. Enable webhook events: `PAYMENT_SUCCESS`, `PAYMENT_FAILED`
 
 ### 3. Environment Variables
 
@@ -33,11 +34,12 @@ NEXT_PUBLIC_SUPABASE_URL="your-project-url"
 NEXT_PUBLIC_SUPABASE_ANON_KEY="your-anon-key"
 SUPABASE_SERVICE_ROLE_KEY="your-service-role-key"
 
-# Razorpay
-RAZORPAY_KEY_ID="rzp_test_xxxxx"
-RAZORPAY_KEY_SECRET="your-secret-key"
-RAZORPAY_WEBHOOK_SECRET="your-webhook-secret"
-NEXT_PUBLIC_RAZORPAY_KEY_ID="rzp_test_xxxxx"
+# Cashfree
+CASHFREE_APP_ID="cf_app_id"
+CASHFREE_SECRET_KEY="cf_secret_key"
+CASHFREE_ENVIRONMENT="sandbox"
+CASHFREE_DEFAULT_CUSTOMER_PHONE="9999999999"
+NEXT_PUBLIC_CASHFREE_ENVIRONMENT="sandbox"
 
 # Google Gemini API
 GOOGLE_API_KEY="your-gemini-key"
@@ -75,10 +77,11 @@ Visit `http://localhost:3000` to see your SaaS application!
 - Credit display in UI
 
 ### ✅ Payment Integration
-- Razorpay payment gateway
-- Two pricing plans:
-  - Basic: ₹415 → 40 credits
-  - Pro: ₹1,660 → 160 credits
+- Cashfree payment gateway
+- Pricing plans:
+  - Basic: ₹499 → 40 credits
+  - Pro: ₹1,499 → 150 credits
+  - Business: ₹3,999 → 350 credits
 - Payment verification and webhook handling
 - Automatic credit top-up after successful payment
 
@@ -106,7 +109,7 @@ Visit `http://localhost:3000` to see your SaaS application!
 1. **Sign Up**: Create account → Get 3 free credits
 2. **Generate**: Create thumbnails → Credits deducted
 3. **Exhaust Credits**: Use all 3 credits → Upgrade modal appears
-4. **Purchase**: Buy credits via Razorpay → Credits added
+4. **Purchase**: Buy credits via Cashfree → Credits added
 5. **Continue**: Generate more thumbnails
 
 ## Production Deployment
@@ -119,9 +122,9 @@ Visit `http://localhost:3000` to see your SaaS application!
 
 ### Environment Variables for Production
 - Update `NEXT_PUBLIC_APP_URL` to your production domain
-- Use production Razorpay keys
-- Use production Supabase project
-- Update webhook URL in Razorpay dashboard
+- Set `CASHFREE_ENVIRONMENT=production`
+- Replace sandbox keys with production Cashfree keys
+- Ensure webhook URL is updated in Cashfree dashboard
 
 ## Database Schema
 
@@ -136,9 +139,9 @@ The application uses the following main tables:
 - `POST /api/generate/image` - Generate thumbnail (requires credits)
 - `POST /api/generate/face-preservation` - Generate with face preservation
 - `GET /api/credits/balance` - Get user credits
-- `POST /api/razorpay/create-order` - Create payment order
-- `POST /api/razorpay/verify-payment` - Verify payment
-- `POST /api/razorpay/webhook` - Handle Razorpay webhooks
+- `POST /api/cashfree/create-order` - Create payment order
+- `POST /api/cashfree/verify-payment` - Verify payment
+- `POST /api/cashfree/webhook` - Handle Cashfree webhooks
 - `GET /api/images/list` - Get user's generated images
 - `DELETE /api/images/delete` - Delete image
 
@@ -156,6 +159,6 @@ For issues or questions:
 1. Check the console logs for errors
 2. Verify environment variables are set correctly
 3. Ensure Supabase RLS policies are active
-4. Check Razorpay webhook configuration
+4. Check Cashfree webhook configuration
 
 The SaaS application is now ready for production use! 🚀

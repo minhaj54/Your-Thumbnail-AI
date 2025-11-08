@@ -18,10 +18,11 @@ The thumbnail generator has been completely transformed into a production-ready 
 - **Credit Deduction**: Automatic deduction after successful generation
 - **Upgrade Prompts**: Modal appears when credits are exhausted
 
-### 💰 **Payment Integration (Razorpay)**
-- **Two Pricing Plans**:
-  - Basic: ₹415 → 40 credits
-  - Pro: ₹1,660 → 160 credits
+### 💰 **Payment Integration (Cashfree)**
+- **Pricing Plans**:
+  - Basic: ₹499 → 40 credits
+  - Pro: ₹1,499 → 150 credits
+  - Business: ₹3,999 → 350 credits
 - **Secure Payment Flow**: Order creation, verification, and webhook handling
 - **Automatic Credit Top-up**: Credits added immediately after successful payment
 - **Payment History**: Complete transaction records
@@ -59,11 +60,11 @@ The thumbnail generator has been completely transformed into a production-ready 
 - Serverless functions for API endpoints
 - CDN-powered image storage
 
-### **Payment Processing (Razorpay)**
-- Secure payment gateway integration
+### **Payment Processing (Cashfree)**
+- Cashfree PG SDK for order management
 - Webhook handling for payment events
-- Signature verification for security
-- Support for all Indian payment methods
+- Signature verification for webhooks
+- Support for major Indian payment methods
 
 ### **AI Integration (Google Gemini)**
 - Gemini 2.5 Flash Image for generation
@@ -81,7 +82,7 @@ src/
 │   │   ├── generate/
 │   │   │   ├── image/route.ts
 │   │   │   └── face-preservation/route.ts
-│   │   ├── razorpay/
+│   │   ├── cashfree/
 │   │   │   ├── create-order/route.ts
 │   │   │   ├── verify-payment/route.ts
 │   │   │   └── webhook/route.ts
@@ -108,7 +109,7 @@ src/
 │   │   └── server.ts
 │   ├── auth.ts
 │   ├── credits.ts
-│   ├── razorpay.ts
+│   ├── cashfree.ts
 │   ├── storage.ts
 │   └── gemini.ts
 └── middleware.ts
@@ -130,12 +131,14 @@ subscriptions (id, user_id, plan_type, credits, amount, currency, status, razorp
 payments (id, user_id, subscription_id, amount, currency, razorpay_payment_id, status, created_at)
 ```
 
+> ℹ️ Existing columns `razorpay_order_id` and `razorpay_payment_id` now store the corresponding Cashfree identifiers for backward compatibility.
+
 ## 🚀 **Ready for Production**
 
 ### **Environment Setup**
 - Complete `.env.example` with all required variables
 - Supabase project configuration
-- Razorpay API keys setup
+- Cashfree API keys setup
 - Google Gemini API integration
 
 ### **Security Features**
@@ -156,7 +159,7 @@ payments (id, user_id, subscription_id, amount, currency, razorpay_payment_id, s
 1. **Sign Up** → Get 3 free credits
 2. **Generate** → Create thumbnails with AI
 3. **Exhaust Credits** → Upgrade modal appears
-4. **Purchase** → Buy credits via Razorpay
+4. **Purchase** → Buy credits via Cashfree
 5. **Continue** → Generate unlimited thumbnails
 6. **Manage** → View, download, delete images in dashboard
 
@@ -165,12 +168,12 @@ payments (id, user_id, subscription_id, amount, currency, razorpay_payment_id, s
 - **Freemium**: 3 free generations to attract users
 - **Credit-based**: Pay-per-use model with no expiry
 - **Scalable Pricing**: Multiple tiers for different user needs
-- **Indian Market Focus**: Razorpay integration for local payments
+- **Indian Market Focus**: Cashfree integration for local payments
 
 ## 🎯 **Next Steps for Production**
 
 1. **Set up Supabase project** and run database migrations
-2. **Configure Razorpay** with production keys and webhooks
+2. **Configure Cashfree** with production keys and webhooks
 3. **Deploy to Vercel** with environment variables
 4. **Test complete flow** from signup to payment
 5. **Monitor and optimize** based on user feedback
@@ -179,7 +182,7 @@ The SaaS application is now **100% complete** and ready for production deploymen
 
 All requested features have been implemented:
 - ✅ Supabase backend and database
-- ✅ Razorpay payment integration
+- ✅ Cashfree payment integration
 - ✅ Credit-based subscription system
 - ✅ Modern Next.js 14 + Tailwind CSS UI
 - ✅ Complete user authentication and management

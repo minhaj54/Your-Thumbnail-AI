@@ -1,0 +1,1267 @@
+
+> thumbnail-builder@1.0.0 dev
+> next dev
+
+   ▲ Next.js 14.0.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+ ⚠ Invalid next.config.js options detected: 
+ ⚠     Unrecognized key(s) in object: 'appDir' at "experimental"
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ✓ Ready in 2.9s
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 14.0.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+ ⚠ Invalid next.config.js options detected: 
+ ⚠     Unrecognized key(s) in object: 'appDir' at "experimental"
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ✓ Ready in 3.1s
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 14.0.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+ ⚠ Invalid next.config.js options detected: 
+ ⚠     Unrecognized key(s) in object: 'appDir' at "experimental"
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ✓ Ready in 3s
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 14.0.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+ ⚠ Invalid next.config.js options detected: 
+ ⚠     Unrecognized key(s) in object: 'appDir' at "experimental"
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ✓ Ready in 2.8s
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 14.0.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+ ⚠ Invalid next.config.js options detected: 
+ ⚠     Unrecognized key(s) in object: 'appDir' at "experimental"
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ✓ Ready in 2.8s
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 14.0.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+ ⚠ Invalid next.config.js options detected: 
+ ⚠     Unrecognized key(s) in object: 'appDir' at "experimental"
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ✓ Ready in 3.8s
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 14.0.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ✓ Ready in 3.2s
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 14.0.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ✓ Ready in 2.8s
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 14.0.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ✓ Ready in 2.3s
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 14.0.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ✓ Ready in 2.3s
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 14.0.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ✓ Ready in 2.8s
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 14.0.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ✓ Ready in 3.4s
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 14.0.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ✓ Ready in 2.9s
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 14.0.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ✓ Ready in 2.5s
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 14.0.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ✓ Ready in 2.6s
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ Found a change in next.config.js. Restarting the server to apply the changes...
+   ▲ Next.js 14.0.0
+   - Local:        http://localhost:3000
+   - Environments: .env.local
+
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ✓ Ready in 3.6s
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ○ Compiling /src/middleware ...
+ ✓ Compiled /src/middleware in 1406ms (153 modules)
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+(node:36700) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+ ○ Compiling /page ...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (126kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+AbortError: The user aborted a request.
+    at abort (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/compiled/node-fetch/index.js:1:65190)
+    at AbortSignal.abortAndFinalize (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/compiled/node-fetch/index.js:1:65410)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:816:20)
+    at AbortSignal.dispatchEvent (node:internal/event_target:751:26)
+    at abortSignal (node:internal/abort_controller:382:10)
+    at AbortController.abort (node:internal/abort_controller:404:5)
+    at Timeout.<anonymous> (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/compiled/@next/font/dist/google/fetch-font-file.js:24:51)
+    at listOnTimeout (node:internal/timers:594:17)
+    at process.processTimers (node:internal/timers:529:7) {
+  type: 'aborted'
+}
+ ⨯ Failed to download `Inter` from Google Fonts. Using fallback font instead.
+
+Failed to fetch `Inter` from Google Fonts.}
+AbortError: The user aborted a request.
+    at abort (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/compiled/node-fetch/index.js:1:65190)
+    at AbortSignal.abortAndFinalize (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/compiled/node-fetch/index.js:1:65410)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:816:20)
+    at AbortSignal.dispatchEvent (node:internal/event_target:751:26)
+    at abortSignal (node:internal/abort_controller:382:10)
+    at AbortController.abort (node:internal/abort_controller:404:5)
+    at Timeout.<anonymous> (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/compiled/@next/font/dist/google/fetch-font-file.js:24:51)
+    at listOnTimeout (node:internal/timers:594:17)
+    at process.processTimers (node:internal/timers:529:7) {
+  type: 'aborted'
+}
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ 
+
+
+
+
+
+
+
+
+
+
+
+
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ 
+
+
+
+
+
+
+
+
+
+
+
+
+ ⨯ Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/pages/_document.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/build/utils.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-server.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/start-server.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1248:15)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:54:36
+    at Module._load (node:internal/modules/cjs/loader:1074:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+    at Module.require (node:internal/modules/cjs/loader:1339:12)
+    at mod.require (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:64:28)
+    at require (node:internal/modules/helpers:135:16)
+    at __webpack_require__.f.require (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:198:28)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:162:22)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/page.js:408:47
+    at Object.<anonymous> (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/page.js:411:3)
+    at Module._compile (node:internal/modules/cjs/loader:1546:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1691:10)
+    at Module.load (node:internal/modules/cjs/loader:1317:32)
+    at Module._load (node:internal/modules/cjs/loader:1127:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+    at Module.require (node:internal/modules/cjs/loader:1339:12)
+    at mod.require (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:64:28)
+    at require (node:internal/modules/helpers:135:16)
+    at requirePage (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js:109:84)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js:59:84
+    at async loadComponentsImpl (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js:59:26)
+    at async DevServer.findPageComponentsImpl (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/next-server.js:666:36) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/pages/_document.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/build/utils.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/start-server.js'
+  ],
+  page: '/'
+}
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⚠ 
+
+
+
+
+
+
+
+
+
+
+
+
+ ⚠ 
+
+
+
+
+
+
+
+
+
+
+
+
+ ⚠ 
+
+
+
+
+
+
+
+
+
+
+
+
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⨯ Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/build/utils.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-server.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/start-server.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1248:15)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:54:36
+    at Module._load (node:internal/modules/cjs/loader:1074:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+    at Module.require (node:internal/modules/cjs/loader:1339:12)
+    at mod.require (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:64:28)
+    at require (node:internal/modules/helpers:135:16)
+    at __webpack_require__.f.require (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:198:28)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:162:22)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js:349:47
+    at Object.<anonymous> (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js:352:3)
+    at Module._compile (node:internal/modules/cjs/loader:1546:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1691:10)
+    at Module.load (node:internal/modules/cjs/loader:1317:32)
+    at Module._load (node:internal/modules/cjs/loader:1127:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+    at Module.require (node:internal/modules/cjs/loader:1339:12)
+    at mod.require (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:64:28)
+    at require (node:internal/modules/helpers:135:16)
+    at requirePage (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js:109:84)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js:59:84
+    at async loadComponentsImpl (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js:59:26)
+    at async DevServer.findPageComponentsImpl (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/next-server.js:666:36) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/build/utils.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/start-server.js'
+  ]
+}
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+Watchpack Error (watcher): Error: EMFILE: too many open files, watch
+ ⨯ Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/build/utils.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-server.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/start-server.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1248:15)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:54:36
+    at Module._load (node:internal/modules/cjs/loader:1074:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+    at Module.require (node:internal/modules/cjs/loader:1339:12)
+    at mod.require (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:64:28)
+    at require (node:internal/modules/helpers:135:16)
+    at __webpack_require__.f.require (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:198:28)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:162:22)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js:349:47
+    at Object.<anonymous> (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js:352:3)
+    at Module._compile (node:internal/modules/cjs/loader:1546:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1691:10)
+    at Module.load (node:internal/modules/cjs/loader:1317:32)
+    at Module._load (node:internal/modules/cjs/loader:1127:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+    at Module.require (node:internal/modules/cjs/loader:1339:12)
+    at mod.require (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:64:28)
+    at require (node:internal/modules/helpers:135:16)
+    at requirePage (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js:109:84)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js:59:84
+    at async loadComponentsImpl (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js:59:26)
+    at async DevServer.findPageComponentsImpl (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/next-server.js:666:36) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/build/utils.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/start-server.js'
+  ]
+}
+ ⨯ Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/build/utils.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-server.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/start-server.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1248:15)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:54:36
+    at Module._load (node:internal/modules/cjs/loader:1074:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+    at Module.require (node:internal/modules/cjs/loader:1339:12)
+    at mod.require (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:64:28)
+    at require (node:internal/modules/helpers:135:16)
+    at __webpack_require__.f.require (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:198:28)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:162:22)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js:349:47
+    at Object.<anonymous> (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js:352:3)
+    at Module._compile (node:internal/modules/cjs/loader:1546:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1691:10)
+    at Module.load (node:internal/modules/cjs/loader:1317:32)
+    at Module._load (node:internal/modules/cjs/loader:1127:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+    at Module.require (node:internal/modules/cjs/loader:1339:12)
+    at mod.require (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:64:28)
+    at require (node:internal/modules/helpers:135:16)
+    at requirePage (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js:109:84)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js:59:84
+    at async loadComponentsImpl (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js:59:26)
+    at async DevServer.findPageComponentsImpl (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/next-server.js:666:36) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/build/utils.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/start-server.js'
+  ]
+}
+ ⨯ Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/build/utils.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-server.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/start-server.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1248:15)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:54:36
+    at Module._load (node:internal/modules/cjs/loader:1074:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+    at Module.require (node:internal/modules/cjs/loader:1339:12)
+    at mod.require (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:64:28)
+    at require (node:internal/modules/helpers:135:16)
+    at __webpack_require__.f.require (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:198:28)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:162:22)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js:349:47
+    at Object.<anonymous> (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js:352:3)
+    at Module._compile (node:internal/modules/cjs/loader:1546:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1691:10)
+    at Module.load (node:internal/modules/cjs/loader:1317:32)
+    at Module._load (node:internal/modules/cjs/loader:1127:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+    at Module.require (node:internal/modules/cjs/loader:1339:12)
+    at mod.require (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:64:28)
+    at require (node:internal/modules/helpers:135:16)
+    at requirePage (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js:109:84)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js:59:84
+    at async loadComponentsImpl (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js:59:26)
+    at async DevServer.findPageComponentsImpl (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/next-server.js:666:36) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/build/utils.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/start-server.js'
+  ]
+}
+ ⨯ Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/build/utils.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-server.js
+- /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/start-server.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1248:15)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:54:36
+    at Module._load (node:internal/modules/cjs/loader:1074:27)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+    at Module.require (node:internal/modules/cjs/loader:1339:12)
+    at mod.require (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:64:28)
+    at require (node:internal/modules/helpers:135:16)
+    at __webpack_require__.f.require (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:198:28)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js:162:22)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js:349:47
+    at Object.<anonymous> (/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js:352:3)
+    at Module._compile (node:internal/modules/cjs/loader:1546:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1691:10)
+    at Module.load (node:internal/modules/cjs/loader:1317:32)
+    at Module._load (node:internal/modules/cjs/loader:1127:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:315:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:217:24)
+    at Module.require (node:internal/modules/cjs/loader:1339:12)
+    at mod.require (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require-hook.js:64:28)
+    at require (node:internal/modules/helpers:135:16)
+    at requirePage (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js:109:84)
+    at /Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js:59:84
+    at async loadComponentsImpl (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js:59:26)
+    at async DevServer.findPageComponentsImpl (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/next-server.js:666:36) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/webpack-runtime.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/.next/server/app/not-found.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/require.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/load-components.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/build/utils.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/server/lib/start-server.js'
+  ]
+}
+node:events:497
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: kill EPERM
+    at ChildProcess.kill (node:internal/child_process:511:26)
+    at process.cleanup (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/cli/next-dev.js:298:11)
+    at process.emit (node:events:531:35)
+Emitted 'error' event on ChildProcess instance at:
+    at ChildProcess.kill (node:internal/child_process:511:12)
+    at process.cleanup (/Users/minhajraza/Desktop/thumbnail-builder copy/node_modules/next/dist/cli/next-dev.js:298:11)
+    at process.emit (node:events:531:35) {
+  errno: -1,
+  code: 'EPERM',
+  syscall: 'kill'
+}
+
+Node.js v22.9.0
