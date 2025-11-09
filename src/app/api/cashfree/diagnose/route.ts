@@ -4,7 +4,7 @@ import { getCashfreeInstance } from '@/lib/cashfree'
 export async function GET(request: NextRequest) {
   try {
     // Check environment variables
-    const diagnostics = {
+    const diagnostics: any = {
       timestamp: new Date().toISOString(),
       environment: {
         CASHFREE_ENVIRONMENT: process.env.CASHFREE_ENVIRONMENT || 'NOT_SET',
