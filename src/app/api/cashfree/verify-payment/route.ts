@@ -24,8 +24,22 @@ export async function POST(request: NextRequest) {
     const orderResponse = await cashfree.PGFetchOrder(orderId)
     const order = orderResponse.data
 
-    if (!order || order.order_status !== 'PAID') {
-      return NextResponse.json({ error: 'Order is not paid yet' }, { status: 400 })
+    console.log('[Cashfree Verify] Order status:', order?.order_status)
+
+    if (!order) {
+      return NextResponse.json({ 
+        success: false,
+        status: 'FAILED',
+        message: 'Order not found' 
+      }, { status: 400 })
+    }
+
+    if (order.order_status !== 'PAID') {
+      return NextResponse.json({ 
+        success: false,
+        status: order.order_status || 'PENDING',
+        message: `Payment is ${order.order_status || 'pending'}. Please wait or try again.` 
+      }, { status: 400 })
     }
 
     const { data: subscription, error: subError } = await supabase
@@ -40,7 +54,12 @@ export async function POST(request: NextRequest) {
     }
 
     if (subscription.status === 'completed') {
-      return NextResponse.json({ error: 'Payment already verified' }, { status: 400 })
+      return NextResponse.json({ 
+        success: true,
+        status: 'SUCCESS',
+        message: 'Payment already verified',
+        credits: subscription.credits 
+      }, { status: 200 })
     }
 
     const paymentsResponse = await cashfree.PGOrderFetchPayments(orderId)
@@ -99,12 +118,17 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
+      status: 'SUCCESS',
       message: 'Payment verified successfully',
       credits: subscription.credits,
     })
   } catch (error) {
     console.error('Error verifying Cashfree payment:', error)
-    return NextResponse.json({ error: 'Failed to verify payment' }, { status: 500 })
+    return NextResponse.json({ 
+      success: false,
+      status: 'FAILED',
+      message: 'Failed to verify payment. Please contact support.' 
+    }, { status: 500 })
   }
 }
 
