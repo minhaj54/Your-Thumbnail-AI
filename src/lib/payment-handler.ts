@@ -69,9 +69,12 @@ export async function openCashfreeCheckout(paymentSessionId: string, callbacks?:
   }
 
   let launch: ((config: any, callbacks?: any) => any) | null = null
-  let launchType: 'checkout' | 'doPayment' | 'makePayment' | 'redirect' | 'drop' | 'elements' | null = null
+  let launchType: 'redirect' | 'checkout' | 'doPayment' | 'makePayment' | 'drop' | 'elements' | null = null
 
-  if (typeof instance.checkout === 'function') {
+  if (typeof instance.redirect === 'function') {
+    launch = instance.redirect.bind(instance)
+    launchType = 'redirect'
+  } else if (typeof instance.checkout === 'function') {
     launch = instance.checkout.bind(instance)
     launchType = 'checkout'
   } else if (typeof instance.doPayment === 'function') {
