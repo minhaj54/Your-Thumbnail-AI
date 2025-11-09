@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
       order_note: JSON.stringify(notes),
     })
 
-    const order = createOrderResponse.data
+    const order = createOrderResponse.data as any // Use 'any' to access payment_link which may not be in type definitions
 
     console.log('[Cashfree] Order creation response:', {
       hasOrder: !!order,
