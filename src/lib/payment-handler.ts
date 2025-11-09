@@ -41,6 +41,29 @@ declare global {
 export async function openCashfreeCheckout(paymentSessionId: string, callbacks?: CashfreeCallbacks) {
   console.log('[Cashfree Checkout] Starting with session ID:', paymentSessionId)
   
+  // FALLBACK: Use direct redirect URL if SDK approach fails
+  // This is the most reliable method for production
+  const useManualRedirect = true // Set to false to try SDK approach
+  
+  if (useManualRedirect) {
+    console.log('[Cashfree Checkout] Using manual redirect approach')
+    const sdkMode = getCashfreeMode()
+    
+    // Correct Cashfree checkout URL format
+    const checkoutUrl = sdkMode === 'production' 
+      ? `https://payments.cashfree.com/order/#${paymentSessionId}`
+      : `https://sandbox.cashfree.com/pg/view/sessions/checkout?session_id=${paymentSessionId}`
+    
+    console.log('[Cashfree Checkout] Redirecting to:', checkoutUrl)
+    
+    // Use window.location for full page redirect
+    window.location.href = checkoutUrl
+    
+    // Return a promise that never resolves (since we're redirecting away)
+    return new Promise(() => {})
+  }
+  
+  // Original SDK approach below (if useManualRedirect is false)
   await loadCashfreeScript()
 
   if (!window.Cashfree) {
