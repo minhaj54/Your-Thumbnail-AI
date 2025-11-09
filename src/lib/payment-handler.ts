@@ -39,6 +39,8 @@ declare global {
 }
 
 export async function openCashfreeCheckout(paymentSessionId: string, callbacks?: CashfreeCallbacks) {
+  console.log('[Cashfree Checkout] Starting with session ID:', paymentSessionId)
+  
   await loadCashfreeScript()
 
   if (!window.Cashfree) {
@@ -46,27 +48,34 @@ export async function openCashfreeCheckout(paymentSessionId: string, callbacks?:
   }
 
   const sdkMode = getCashfreeMode()
+  console.log('[Cashfree Checkout] Mode:', sdkMode)
 
   let instance: any
   const initializer: any = window.Cashfree
 
   try {
     instance = initializer({ mode: sdkMode })
+    console.log('[Cashfree Checkout] Instance created (method 1)')
   } catch (err) {
     try {
       instance = new initializer({ mode: sdkMode })
+      console.log('[Cashfree Checkout] Instance created (method 2)')
     } catch (innerErr) {
+      console.error('[Cashfree Checkout] Failed to create instance:', innerErr)
       throw innerErr
     }
   }
 
   if (instance && typeof instance.then === 'function') {
     instance = await instance
+    console.log('[Cashfree Checkout] Instance resolved from promise')
   }
 
   if (!instance) {
     throw new Error('Cashfree checkout instance could not be initialized')
   }
+  
+  console.log('[Cashfree Checkout] Available methods:', Object.keys(instance))
 
   let launch: ((config: any, callbacks?: any) => any) | null = null
   let launchType: 'redirect' | 'checkout' | 'doPayment' | 'makePayment' | 'drop' | 'elements' | null = null
@@ -107,11 +116,20 @@ export async function openCashfreeCheckout(paymentSessionId: string, callbacks?:
 
   return new Promise((resolve, reject) => {
     try {
+      console.log('[Cashfree Checkout] Using launch type:', launchType)
+      console.log('[Cashfree Checkout] Payment session ID to pass:', paymentSessionId)
+      
+      // Try both parameter name formats for compatibility
+      const checkoutConfig = {
+        paymentSessionId: paymentSessionId,
+        session_id: paymentSessionId, // Some SDK versions use snake_case
+        redirectTarget: '_self',
+      }
+      
       if (launchType === 'redirect') {
-        const result = launch({
-          paymentSessionId,
-          redirectTarget: '_self',
-        })
+        console.log('[Cashfree Checkout] Calling redirect with config:', checkoutConfig)
+        
+        const result = launch(checkoutConfig)
 
         if (result && typeof result.then === 'function') {
           result.then(resolve).catch(reject)
@@ -121,17 +139,18 @@ export async function openCashfreeCheckout(paymentSessionId: string, callbacks?:
         return
       }
 
+      console.log('[Cashfree Checkout] Calling', launchType, 'with config:', checkoutConfig)
+
       const result = launch(
-        {
-          paymentSessionId,
-          redirectTarget: '_self',
-        },
+        checkoutConfig,
         {
           onSuccess: (data: any) => {
+            console.log('[Cashfree Checkout] Success callback:', data)
             callbacks?.onSuccess(data)
             resolve(data)
           },
           onFailure: (error: any) => {
+            console.error('[Cashfree Checkout] Failure callback:', error)
             callbacks?.onFailure(error)
             reject(error)
           },
@@ -142,6 +161,7 @@ export async function openCashfreeCheckout(paymentSessionId: string, callbacks?:
         result.then(resolve).catch(reject)
       }
     } catch (error) {
+      console.error('[Cashfree Checkout] Launch error:', error)
       reject(error)
     }
   })
