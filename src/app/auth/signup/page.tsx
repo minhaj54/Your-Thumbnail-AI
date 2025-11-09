@@ -78,16 +78,17 @@ export default function SignUpPage() {
       
       if (error) {
         setError(error.message || 'Failed to create account. Please try again.')
+        setIsLoading(false)
       } else {
         setSuccess(true)
-        // Redirect to dashboard after successful signup
+        // Wait for auth state to sync, then redirect
+        // Use window.location for better compatibility in incognito mode
         setTimeout(() => {
-          router.push('/dashboard')
+          window.location.href = '/dashboard'
         }, 2000)
       }
     } catch (err) {
       setError('An unexpected error occurred. Please try again.')
-    } finally {
       setIsLoading(false)
     }
   }

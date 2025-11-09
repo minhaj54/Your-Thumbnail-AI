@@ -29,12 +29,17 @@ export default function SignInPage() {
       
       if (error) {
         setError(error.message || 'Invalid credentials. Please try again.')
+        setIsLoading(false)
       } else {
-        router.push(redirectTo)
+        // Wait a bit for auth state to sync before redirecting
+        // This is especially important in incognito/private mode
+        await new Promise(resolve => setTimeout(resolve, 500))
+        
+        // Use window.location for more reliable redirect in incognito mode
+        window.location.href = redirectTo
       }
     } catch (err) {
       setError('An unexpected error occurred. Please try again.')
-    } finally {
       setIsLoading(false)
     }
   }
