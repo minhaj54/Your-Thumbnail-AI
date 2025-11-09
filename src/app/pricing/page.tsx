@@ -132,6 +132,10 @@ export default function PricingPage() {
       const data = await response.json()
       console.log('Order creation response:', data)
 
+      if (data.order?.paymentSessionId?.startsWith('session_sandbox_') && process.env.NEXT_PUBLIC_CASHFREE_ENVIRONMENT === 'production') {
+        throw new Error('Cashfree session generated in sandbox while frontend is in production mode. Check server env vars.')
+      }
+
       if (!data.success || !data.order?.paymentSessionId) {
         throw new Error('Failed to create order')
       }

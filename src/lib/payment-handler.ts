@@ -6,8 +6,8 @@ export interface CashfreeCallbacks {
 }
 
 export function getCashfreeMode(): CashfreeMode {
-  const env = process.env.NEXT_PUBLIC_CASHFREE_ENVIRONMENT ?? 'sandbox'
-  return env.toLowerCase() === 'production' ? 'production' : 'sandbox'
+  const env = (process.env.NEXT_PUBLIC_CASHFREE_ENVIRONMENT ?? 'sandbox').trim().toLowerCase()
+  return env === 'production' ? 'production' : 'sandbox'
 }
 
 export function loadCashfreeScript(): Promise<void> {

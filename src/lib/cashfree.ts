@@ -10,8 +10,8 @@ export const PRICING_CONFIG = {
 let cashfreeInstance: Cashfree | null = null
 
 function resolveEnvironment(): CFEnvironment {
-  const env = process.env.CASHFREE_ENVIRONMENT ?? 'sandbox'
-  return env.toLowerCase() === 'production' ? CFEnvironment.PRODUCTION : CFEnvironment.SANDBOX
+  const env = (process.env.CASHFREE_ENVIRONMENT ?? 'sandbox').trim().toLowerCase()
+  return env === 'production' ? CFEnvironment.PRODUCTION : CFEnvironment.SANDBOX
 }
 
 export function getPlanDetails(planType: string) {

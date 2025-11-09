@@ -52,6 +52,13 @@ export async function POST(request: NextRequest) {
 
     const cashfree = getCashfreeInstance()
 
+    console.info('[Cashfree] Creating order', {
+      mode: process.env.CASHFREE_ENVIRONMENT,
+      planType,
+      isPayAsYouGo,
+      amount: toRupees(orderAmountPaise),
+    })
+
     const orderId = `tai_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`
 
     const createOrderResponse = await cashfree.PGCreateOrder({
@@ -101,6 +108,7 @@ export async function POST(request: NextRequest) {
         amount: order.order_amount,
         currency: order.order_currency,
         paymentSessionId: order.payment_session_id,
+        environment: process.env.CASHFREE_ENVIRONMENT ?? 'sandbox',
       },
     })
   } catch (error) {
