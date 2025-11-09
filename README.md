@@ -206,10 +206,23 @@ A standalone example is available in `examples/vanilla-js-editor/`:
    - Ensure you're running the development server
    - Check API endpoint configurations
 
+4. **Payment Issues - "payment_session_id is not present or is invalid"**:
+   - See [START_HERE.md](START_HERE.md) for complete payment debugging guide
+   - Run `node verify-env.js` to check local setup
+   - Visit `/api/cashfree/diagnose` on deployed site to test configuration
+   - Refer to [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md) for step-by-step deployment
+
 ### **Getting Help**
 - Check the browser console (F12) for detailed errors
 - Review the API documentation
 - Check your environment variables
+
+### **Payment Debugging Resources**
+- 📖 [START_HERE.md](START_HERE.md) - Quick start guide for fixing payment issues
+- ✅ [DEPLOYMENT_CHECKLIST.md](DEPLOYMENT_CHECKLIST.md) - Deployment checklist
+- 🔍 [PAYMENT_DEBUG_GUIDE.md](PAYMENT_DEBUG_GUIDE.md) - Detailed troubleshooting
+- 📝 [PAYMENT_FIX_SUMMARY.md](PAYMENT_FIX_SUMMARY.md) - Summary of changes made
+- 🛠️ `verify-env.js` - Local environment verification script
 
 ## 📚 Documentation
 

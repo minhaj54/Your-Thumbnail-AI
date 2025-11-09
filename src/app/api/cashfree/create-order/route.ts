@@ -79,8 +79,31 @@ export async function POST(request: NextRequest) {
 
     const order = createOrderResponse.data
 
+    console.log('[Cashfree] Order creation response:', {
+      hasOrder: !!order,
+      hasPaymentSessionId: !!order?.payment_session_id,
+      paymentSessionIdPrefix: order?.payment_session_id?.substring(0, 20),
+      orderId: order?.order_id,
+      fullResponse: JSON.stringify(order).substring(0, 500),
+    })
+
     if (!order || !order.payment_session_id) {
-      return NextResponse.json({ error: 'Failed to create Cashfree order' }, { status: 502 })
+      console.error('[Cashfree] Order creation failed - missing payment_session_id', {
+        order,
+        response: createOrderResponse,
+      })
+      return NextResponse.json(
+        {
+          error: 'Failed to create Cashfree order',
+          details: 'payment_session_id not returned from Cashfree API',
+          debug: {
+            hasOrder: !!order,
+            orderKeys: order ? Object.keys(order) : [],
+            environment: process.env.CASHFREE_ENVIRONMENT,
+          },
+        },
+        { status: 502 }
+      )
     }
 
     const subscriptionData = {
@@ -111,10 +134,44 @@ export async function POST(request: NextRequest) {
         environment: process.env.CASHFREE_ENVIRONMENT ?? 'sandbox',
       },
     })
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error creating Cashfree order:', error)
+    
+    // Extract detailed error information from Cashfree API
+    const errorDetails: any = {
+      message: error instanceof Error ? error.message : 'Unknown error',
+      type: error.constructor?.name || 'Unknown',
+    }
+
+    if (error.response) {
+      errorDetails.cashfreeResponse = {
+        status: error.response.status,
+        statusText: error.response.statusText,
+        data: error.response.data,
+      }
+    }
+
+    if (error.config) {
+      errorDetails.requestConfig = {
+        url: error.config.url,
+        method: error.config.method,
+        headers: error.config.headers ? 'SET' : 'NOT_SET',
+      }
+    }
+
+    console.error('[Cashfree] Detailed error:', errorDetails)
+
     return NextResponse.json(
-      { error: 'Failed to create order', message: error instanceof Error ? error.message : 'Unknown error' },
+      {
+        error: 'Failed to create order',
+        message: error instanceof Error ? error.message : 'Unknown error',
+        details: errorDetails,
+        environment: {
+          CASHFREE_ENVIRONMENT: process.env.CASHFREE_ENVIRONMENT || 'NOT_SET',
+          CASHFREE_APP_ID: process.env.CASHFREE_APP_ID ? 'SET' : 'NOT_SET',
+          CASHFREE_SECRET_KEY: process.env.CASHFREE_SECRET_KEY ? 'SET' : 'NOT_SET',
+        },
+      },
       { status: 500 }
     )
   }

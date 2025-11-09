@@ -132,12 +132,23 @@ export default function PricingPage() {
       const data = await response.json()
       console.log('Order creation response:', data)
 
+      // Check for API errors
+      if (!response.ok) {
+        console.error('Order creation failed:', data)
+        throw new Error(
+          data.details || data.message || data.error || 'Failed to create order'
+        )
+      }
+
       if (data.order?.paymentSessionId?.startsWith('session_sandbox_') && process.env.NEXT_PUBLIC_CASHFREE_ENVIRONMENT === 'production') {
         throw new Error('Cashfree session generated in sandbox while frontend is in production mode. Check server env vars.')
       }
 
       if (!data.success || !data.order?.paymentSessionId) {
-        throw new Error('Failed to create order')
+        console.error('Invalid order response:', data)
+        throw new Error(
+          data.details || data.message || 'Failed to create order - no payment session ID received'
+        )
       }
 
       await loadCashfreeScript()
@@ -217,9 +228,21 @@ export default function PricingPage() {
       })
 
       const data = await response.json()
+      console.log('Pay-as-you-go order creation response:', data)
+
+      // Check for API errors
+      if (!response.ok) {
+        console.error('Order creation failed:', data)
+        throw new Error(
+          data.details || data.message || data.error || 'Failed to create order'
+        )
+      }
 
       if (!data.success || !data.order?.paymentSessionId) {
-        throw new Error('Failed to create order')
+        console.error('Invalid order response:', data)
+        throw new Error(
+          data.details || data.message || 'Failed to create order - no payment session ID received'
+        )
       }
 
       await loadCashfreeScript()
