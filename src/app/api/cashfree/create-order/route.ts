@@ -82,8 +82,11 @@ export async function POST(request: NextRequest) {
     console.log('[Cashfree] Order creation response:', {
       hasOrder: !!order,
       hasPaymentSessionId: !!order?.payment_session_id,
+      hasPaymentLink: !!order?.payment_link,
       paymentSessionIdPrefix: order?.payment_session_id?.substring(0, 20),
+      paymentLink: order?.payment_link,
       orderId: order?.order_id,
+      cfOrderId: order?.cf_order_id,
       fullResponse: JSON.stringify(order).substring(0, 500),
     })
 
@@ -131,6 +134,7 @@ export async function POST(request: NextRequest) {
         amount: order.order_amount,
         currency: order.order_currency,
         paymentSessionId: order.payment_session_id,
+        paymentLink: order.payment_link, // Direct checkout link from Cashfree
         environment: process.env.CASHFREE_ENVIRONMENT ?? 'sandbox',
       },
     })

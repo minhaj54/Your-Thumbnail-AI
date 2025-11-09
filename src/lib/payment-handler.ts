@@ -5,6 +5,11 @@ export interface CashfreeCallbacks {
   onFailure: (error: any) => void
 }
 
+export interface CashfreeCheckoutOptions {
+  paymentSessionId: string
+  paymentLink?: string // Optional direct payment link from Cashfree
+}
+
 export function getCashfreeMode(): CashfreeMode {
   const env = (process.env.NEXT_PUBLIC_CASHFREE_ENVIRONMENT ?? 'sandbox').trim().toLowerCase()
   return env === 'production' ? 'production' : 'sandbox'
@@ -38,23 +43,46 @@ declare global {
   }
 }
 
-export async function openCashfreeCheckout(paymentSessionId: string, callbacks?: CashfreeCallbacks) {
-  console.log('[Cashfree Checkout] Starting with session ID:', paymentSessionId)
+export async function openCashfreeCheckout(
+  paymentSessionIdOrOptions: string | CashfreeCheckoutOptions,
+  callbacks?: CashfreeCallbacks
+) {
+  // Handle both old string format and new options object
+  const paymentSessionId = typeof paymentSessionIdOrOptions === 'string' 
+    ? paymentSessionIdOrOptions 
+    : paymentSessionIdOrOptions.paymentSessionId
   
-  // FALLBACK: Use direct redirect URL if SDK approach fails
-  // This is the most reliable method for production
+  const paymentLink = typeof paymentSessionIdOrOptions === 'object' 
+    ? paymentSessionIdOrOptions.paymentLink 
+    : undefined
+  
+  console.log('[Cashfree Checkout] Starting')
+  console.log('[Cashfree Checkout] Session ID:', paymentSessionId)
+  console.log('[Cashfree Checkout] Payment Link:', paymentLink || 'Not provided')
+  
+  // PRIORITY 1: Use payment_link from Cashfree if available (most reliable)
+  if (paymentLink) {
+    console.log('[Cashfree Checkout] Using direct payment link from Cashfree')
+    console.log('[Cashfree Checkout] Redirecting to:', paymentLink)
+    window.location.href = paymentLink
+    return new Promise(() => {})
+  }
+  
+  // PRIORITY 2: Use manual redirect with constructed URL
   const useManualRedirect = true // Set to false to try SDK approach
   
   if (useManualRedirect) {
     console.log('[Cashfree Checkout] Using manual redirect approach')
     const sdkMode = getCashfreeMode()
     
-    // Correct Cashfree checkout URL format
+    // CORRECT Cashfree checkout URL format (updated for v2 API)
+    // Reference: https://docs.cashfree.com/docs/payment-gateway
     const checkoutUrl = sdkMode === 'production' 
-      ? `https://payments.cashfree.com/order/#${paymentSessionId}`
-      : `https://sandbox.cashfree.com/pg/view/sessions/checkout?session_id=${paymentSessionId}`
+      ? `https://payments.cashfree.com/forms/${paymentSessionId}`
+      : `https://sandbox.cashfree.com/pg/checkout/pay/${paymentSessionId}`
     
-    console.log('[Cashfree Checkout] Redirecting to:', checkoutUrl)
+    console.log('[Cashfree Checkout] Mode:', sdkMode)
+    console.log('[Cashfree Checkout] Constructed URL:', checkoutUrl)
     
     // Use window.location for full page redirect
     window.location.href = checkoutUrl

@@ -189,7 +189,17 @@ export default function PricingPage() {
         }
       }
 
-      await openCashfreeCheckout(data.order.paymentSessionId, {
+      // Use payment link if available, otherwise use session ID
+      const checkoutOptions = data.order.paymentLink 
+        ? {
+            paymentSessionId: data.order.paymentSessionId,
+            paymentLink: data.order.paymentLink
+          }
+        : data.order.paymentSessionId
+      
+      console.log('Opening Cashfree checkout with:', checkoutOptions)
+      
+      await openCashfreeCheckout(checkoutOptions, {
         onSuccess: async (paymentData: any) => {
           await handleVerification(paymentData)
         },
@@ -282,7 +292,17 @@ export default function PricingPage() {
         }
       }
 
-      await openCashfreeCheckout(data.order.paymentSessionId, {
+      // Use payment link if available, otherwise use session ID
+      const checkoutOptions = data.order.paymentLink 
+        ? {
+            paymentSessionId: data.order.paymentSessionId,
+            paymentLink: data.order.paymentLink
+          }
+        : data.order.paymentSessionId
+      
+      console.log('Opening Cashfree checkout (pay-as-you-go) with:', checkoutOptions)
+      
+      await openCashfreeCheckout(checkoutOptions, {
         onSuccess: async (paymentData: any) => {
           await handleVerification(paymentData)
         },
