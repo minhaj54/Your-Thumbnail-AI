@@ -75,13 +75,14 @@ export async function openCashfreeCheckout(
     console.log('[Cashfree Checkout] Using manual redirect approach')
     const sdkMode = getCashfreeMode()
     
-    // CORRECT Cashfree checkout URL format (updated for v2 API)
-    // Reference: https://docs.cashfree.com/docs/payment-gateway
+    // Cashfree checkout URL - using the payment page endpoint with session_id as query param
+    // This is the most reliable format that works consistently
     const checkoutUrl = sdkMode === 'production' 
-      ? `https://payments.cashfree.com/forms/${paymentSessionId}`
-      : `https://sandbox.cashfree.com/pg/checkout/pay/${paymentSessionId}`
+      ? `https://payments.cashfree.com/order?payment_session_id=${paymentSessionId}`
+      : `https://sandbox.cashfree.com/order?payment_session_id=${paymentSessionId}`
     
     console.log('[Cashfree Checkout] Mode:', sdkMode)
+    console.log('[Cashfree Checkout] Session ID:', paymentSessionId)
     console.log('[Cashfree Checkout] Constructed URL:', checkoutUrl)
     
     // Use window.location for full page redirect
