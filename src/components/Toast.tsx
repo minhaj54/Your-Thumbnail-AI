@@ -19,22 +19,22 @@ export const Toast: React.FC<ToastProps> = ({ message, type, onClose }) => {
   }, [onClose])
 
   return (
-    <div className={`fixed top-4 right-4 z-50 p-4 rounded-xl shadow-2xl flex items-center gap-3 min-w-[300px] max-w-md animate-slide-in ${
+    <div className={`fixed top-4 right-4 left-4 sm:left-auto z-50 p-3 sm:p-4 rounded-xl shadow-2xl flex items-center gap-2 sm:gap-3 sm:min-w-[300px] max-w-md animate-slide-in ${
       type === 'success' 
         ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white' 
         : 'bg-gradient-to-r from-red-500 to-rose-500 text-white'
     }`}>
       {type === 'success' ? (
-        <CheckCircle className="h-5 w-5 flex-shrink-0" />
+        <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
       ) : (
-        <XCircle className="h-5 w-5 flex-shrink-0" />
+        <XCircle className="h-4 w-4 sm:h-5 sm:w-5 flex-shrink-0" />
       )}
-      <p className="flex-1 text-sm font-medium">{message}</p>
+      <p className="flex-1 text-xs sm:text-sm font-medium">{message}</p>
       <button
         onClick={onClose}
         className="flex-shrink-0 hover:bg-white/20 rounded-lg p-1 transition-colors"
       >
-        <X className="h-4 w-4" />
+        <X className="h-3 w-3 sm:h-4 sm:w-4" />
       </button>
     </div>
   )
@@ -54,7 +54,7 @@ export const useToast = () => {
   }
 
   const ToastContainer = () => (
-    <div className="fixed top-4 right-4 z-50 flex flex-col gap-2">
+    <div className="fixed top-4 right-4 left-4 sm:left-auto z-50 flex flex-col gap-2">
       {toasts.map(toast => (
         <Toast
           key={toast.id}

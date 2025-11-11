@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
+import { AuthGuard } from '@/components/AuthGuard'
 import { useToast } from '@/contexts/ToastContext'
 import { Navbar } from '@/components/Navbar'
-import { User, Calendar, CreditCard, Image as ImageIcon, Eye, EyeOff, RefreshCw } from 'lucide-react'
+import { User, Calendar, CreditCard, Image as ImageIcon, Eye, EyeOff, RefreshCw, CheckCircle, XCircle, Clock } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useUserProfile, usePaymentHistory } from '@/hooks/useCache'
 
 interface UserProfile {
   email: string
@@ -16,44 +18,54 @@ interface UserProfile {
   credits_used: number
 }
 
+interface PaymentHistory {
+  id: string
+  amount: number
+  currency: string
+  payment_id: string
+  status: string
+  plan_type: string
+  credits: number
+  created_at: string
+}
+
 export default function ProfilePage() {
   const { user } = useAuth()
   const { error: showError } = useToast()
   const router = useRouter()
-  const [profile, setProfile] = useState<UserProfile | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  
+  // Use cached data hooks
+  const { profile, isLoading, mutate: mutateProfile } = useUserProfile()
+  const { payments: paymentHistory, isLoading: isLoadingBilling, mutate: mutatePayments } = usePaymentHistory()
+  
   const [activeTab, setActiveTab] = useState<'profile' | 'billing'>('profile')
   
   // Form states
-  const [showEmail, setShowEmail] = useState(false)
+  const [showEmail, setShowEmail] = useState(true)
 
   useEffect(() => {
     if (!user) {
       router.push('/auth/signin')
       return
     }
-    loadProfile()
   }, [user, router])
 
+  // Refresh functions using SWR mutate
   const loadProfile = async () => {
-    setIsLoading(true)
     try {
-      const response = await fetch('/api/user/profile')
-      const data = await response.json()
-      
-      console.log('Profile API response:', data)
-      
-      if (data.success) {
-        setProfile(data.data)
-      } else if (data.error) {
-        console.error('Profile API error:', data.error)
-        showError(data.error)
-      }
+      await mutateProfile()
     } catch (error) {
       console.error('Error loading profile:', error)
       showError('Failed to load profile')
-    } finally {
-      setIsLoading(false)
+    }
+  }
+
+  const loadBillingHistory = async () => {
+    try {
+      await mutatePayments()
+    } catch (error) {
+      console.error('Error loading billing history:', error)
+      showError('Failed to load billing history')
     }
   }
 
@@ -65,13 +77,13 @@ export default function ProfilePage() {
       free: {
         name: 'Free',
         price: 0,
-        credits: 5,
+        credits: 3,
         description: 'Perfect for trying out',
         features: [
-          '5 credits per month',
+          '3 credits per month',
           '1 thumbnail = 1 credit',
-          'Basic AI features',
-          'Standard quality exports',
+          'AI-powered generation',
+          'High quality exports',
           'Community support',
         ],
       },
@@ -83,10 +95,9 @@ export default function ProfilePage() {
         features: [
           '40 credits per month',
           '1 thumbnail = 1 credit',
-          'Advanced AI features',
+          'AI-powered generation',
           'High quality exports',
           'Priority support',
-          'Custom templates',
         ],
       },
       pro: {
@@ -97,12 +108,9 @@ export default function ProfilePage() {
         features: [
           '150 credits per month',
           '1 thumbnail = 1 credit',
-          'Premium AI features',
-          'Ultra HD exports',
-          'Priority support 24/7',
-          'Custom templates',
-          'Brand kit',
-          'API access',
+          'AI-powered generation',
+          'High quality exports',
+          'Priority support',
         ],
       },
       custom: {
@@ -113,14 +121,9 @@ export default function ProfilePage() {
         features: [
           '350 credits per month',
           '1 thumbnail = 1 credit',
-          'All premium features',
-          'Ultra HD exports',
-          'Dedicated support',
-          'Unlimited templates',
-          'Full brand kit',
-          'API access',
-          'Team collaboration',
-          'Analytics dashboard',
+          'AI-powered generation',
+          'High quality exports',
+          'Priority support',
         ],
       },
     }
@@ -142,8 +145,9 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <Navbar />
+    <AuthGuard>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+        <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
@@ -380,19 +384,97 @@ export default function ProfilePage() {
                   })()}
                 </div>
 
-                <div className="card p-8">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Billing History</h2>
-                  <div className="text-center py-12 text-gray-500">
-                    <CreditCard className="h-12 w-12 mx-auto mb-3 text-gray-400" />
-                    <p>No billing history yet</p>
+                {/* Payment History */}
+                <div className="card p-4 sm:p-8">
+                  <div className="flex items-center justify-between mb-4 sm:mb-6">
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Payment History</h2>
+                    <button
+                      onClick={loadBillingHistory}
+                      disabled={isLoadingBilling}
+                      className="btn btn-outline btn-sm gap-2"
+                    >
+                      <RefreshCw className={`h-4 w-4 ${isLoadingBilling ? 'animate-spin' : ''}`} />
+                      <span className="hidden sm:inline">Refresh</span>
+                    </button>
                   </div>
+                  
+                  {isLoadingBilling ? (
+                    <div className="text-center py-12">
+                      <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary-600 border-t-transparent mx-auto mb-4"></div>
+                      <p className="text-gray-600">Loading payments...</p>
+                    </div>
+                  ) : paymentHistory.length > 0 ? (
+                    <div className="overflow-x-auto">
+                      <table className="w-full">
+                        <thead>
+                          <tr className="border-b-2 border-gray-200">
+                            <th className="text-left p-3 text-xs sm:text-sm font-semibold text-gray-700">Date</th>
+                            <th className="text-left p-3 text-xs sm:text-sm font-semibold text-gray-700">Plan</th>
+                            <th className="text-left p-3 text-xs sm:text-sm font-semibold text-gray-700">Amount</th>
+                            <th className="text-left p-3 text-xs sm:text-sm font-semibold text-gray-700 hidden sm:table-cell">Credits</th>
+                            <th className="text-left p-3 text-xs sm:text-sm font-semibold text-gray-700">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {(paymentHistory || []).map((payment: PaymentHistory) => (
+                            <tr key={payment.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                              <td className="p-3 text-xs sm:text-sm text-gray-900">
+                                {new Date(payment.created_at).toLocaleDateString('en-US', {
+                                  month: 'short',
+                                  day: 'numeric',
+                                  year: 'numeric'
+                                })}
+                              </td>
+                              <td className="p-3 text-xs sm:text-sm text-gray-900 capitalize">
+                                {payment.plan_type}
+                              </td>
+                              <td className="p-3 text-xs sm:text-sm font-semibold text-gray-900">
+                                ₹{payment.amount}
+                              </td>
+                              <td className="p-3 text-xs sm:text-sm text-gray-900 hidden sm:table-cell">
+                                {payment.credits}
+                              </td>
+                              <td className="p-3">
+                                {payment.status === 'completed' && (
+                                  <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
+                                    <CheckCircle className="h-3 w-3" />
+                                    <span className="hidden sm:inline">Paid</span>
+                                  </span>
+                                )}
+                                {payment.status === 'pending' && (
+                                  <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-yellow-100 text-yellow-700 text-xs font-semibold">
+                                    <Clock className="h-3 w-3" />
+                                    <span className="hidden sm:inline">Pending</span>
+                                  </span>
+                                )}
+                                {payment.status === 'failed' && (
+                                  <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-red-100 text-red-700 text-xs font-semibold">
+                                    <XCircle className="h-3 w-3" />
+                                    <span className="hidden sm:inline">Failed</span>
+                                  </span>
+                                )}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  ) : (
+                    <div className="text-center py-12 text-gray-500">
+                      <CreditCard className="h-12 w-12 mx-auto mb-3 text-gray-400" />
+                      <p className="font-medium mb-1">No payment history yet</p>
+                      <p className="text-sm">Your payment transactions will appear here</p>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </AuthGuard>
   )
 }
+
 

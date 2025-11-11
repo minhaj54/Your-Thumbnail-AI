@@ -52,7 +52,7 @@ NEXT_PUBLIC_APP_URL="http://localhost:3000"
 
 ## Pricing Structure
 
-1. **Free**: 5 credits/month - ₹0
+1. **Free**: 3 credits/month - ₹0
 2. **Basic**: 40 credits/month - ₹499
 3. **Pro**: 150 credits/month - ₹1,499
 4. **Business**: 350 credits/month - ₹3,999

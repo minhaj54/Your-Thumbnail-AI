@@ -1,0 +1,32 @@
+# robots.txt for YourThumbnailAI
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow private/authenticated pages
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /api/
+Disallow: /generate
+
+# Allow public pages
+Allow: /
+Allow: /pricing
+Allow: /gallery
+Allow: /prompt-library
+Allow: /terms
+Allow: /privacy
+Allow: /auth/signin
+Allow: /auth/signup
+
+# Sitemap location
+Sitemap: https://yourthumbnailai.com/sitemap.xml
+
+# Crawl-delay for specific bots (optional)
+User-agent: Googlebot
+Crawl-delay: 0
+
+User-agent: Bingbot
+Crawl-delay: 1
+

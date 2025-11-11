@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Sparkles, Download, RefreshCw, Wand2, Upload, X, Image as ImageIcon, Zap, Copy, Link as LinkIcon, Palette, Clock, CheckCircle2, Maximize2, Loader2, FileText } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 import { Navbar } from '@/components/Navbar'
+import { AuthGuard } from '@/components/AuthGuard'
 
 type ImageGenerationOptions = {
   style?: 'realistic' | 'artistic' | 'minimalist' | 'vibrant' | 'professional'
@@ -645,119 +646,162 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
     }
   }
 
-  const quickTemplates = [
-    { name: 'YouTube Tech', prompt: 'Modern tech review thumbnail with bold text space and tech elements' },
-    { name: 'Gaming', prompt: 'Epic gaming thumbnail with action and dynamic composition' },
-    { name: 'Vlog Style', prompt: 'Energetic vlog thumbnail with vibrant colors and personality' },
-    { name: 'Tutorial', prompt: 'Educational tutorial thumbnail with clear focus and clean design' },
-    { name: 'Food', prompt: 'Appetizing food thumbnail with warm lighting and delicious presentation' },
-    { name: 'Travel', prompt: 'Stunning travel destination thumbnail with scenic beauty' },
-  ]
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <Navbar />
+    <AuthGuard>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+        <Navbar />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="mb-8 text-center animate-fade-in">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+        <div className="mb-6 sm:mb-8 text-center animate-fade-in px-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2 sm:mb-3">
             Create <span className="gradient-text">Viral Thumbnails</span>
           </h1>
-          <p className="text-lg text-gray-600">Generate 3 unique variants in seconds with AI magic</p>
+          <p className="text-base sm:text-lg text-gray-600">Generate 3 unique variants in seconds with AI magic</p>
         </div>
 
-        {/* Mode Selector */}
-        <div className="mb-8 flex justify-center">
-          <div className="inline-flex bg-white rounded-2xl p-2 shadow-lg border border-gray-200">
+        {/* Mode Selector - Responsive Grid on Mobile, Inline on Desktop */}
+        <div className="mb-6 sm:mb-8 px-4">
+          {/* Desktop View - Horizontal Tabs */}
+          <div className="hidden lg:flex justify-center">
+            <div className="inline-flex bg-white rounded-2xl p-2 shadow-lg border border-gray-200">
+              <button
+                onClick={() => setMode('create')}
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                  mode === 'create'
+                    ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-md'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <Sparkles className="h-5 w-5" />
+                Create from Scratch
+              </button>
+              <button
+                onClick={() => setMode('clone')}
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                  mode === 'clone'
+                    ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-md'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <Copy className="h-5 w-5" />
+                Clone Thumbnail
+              </button>
+              <button
+                onClick={() => setMode('analyzer')}
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                  mode === 'analyzer'
+                    ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-md'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <Zap className="h-5 w-5" />
+                Analyzer
+              </button>
+              <button
+                onClick={() => setMode('extract')}
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                  mode === 'extract'
+                    ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-md'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                <FileText className="h-5 w-5" />
+                Extract Prompt
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile/Tablet View - 2x2 Grid */}
+          <div className="lg:hidden grid grid-cols-2 gap-3 max-w-2xl mx-auto">
             <button
               onClick={() => setMode('create')}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+              className={`flex flex-col items-center justify-center gap-2 px-4 py-4 rounded-xl font-semibold transition-all ${
                 mode === 'create'
-                  ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-md'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-primary-500'
               }`}
             >
-              <Sparkles className="h-5 w-5" />
-              Create from Scratch
+              <Sparkles className="h-6 w-6" />
+              <span className="text-sm">Create</span>
             </button>
             <button
               onClick={() => setMode('clone')}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+              className={`flex flex-col items-center justify-center gap-2 px-4 py-4 rounded-xl font-semibold transition-all ${
                 mode === 'clone'
-                  ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-md'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-primary-500'
               }`}
             >
-              <Copy className="h-5 w-5" />
-              Clone Thumbnail
+              <Copy className="h-6 w-6" />
+              <span className="text-sm">Clone</span>
             </button>
             <button
               onClick={() => setMode('analyzer')}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+              className={`flex flex-col items-center justify-center gap-2 px-4 py-4 rounded-xl font-semibold transition-all ${
                 mode === 'analyzer'
-                  ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-md'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-primary-500'
               }`}
             >
-              <Zap className="h-5 w-5" />
-              Analyzer
+              <Zap className="h-6 w-6" />
+              <span className="text-sm">Analyzer</span>
             </button>
             <button
               onClick={() => setMode('extract')}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+              className={`flex flex-col items-center justify-center gap-2 px-4 py-4 rounded-xl font-semibold transition-all ${
                 mode === 'extract'
-                  ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-md'
-                  : 'text-gray-600 hover:text-gray-900'
+                  ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-primary-500'
               }`}
             >
-              <FileText className="h-5 w-5" />
-              Extract Prompt
+              <FileText className="h-6 w-6" />
+              <span className="text-sm">Extract</span>
             </button>
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {/* Generation Form */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {/* Mode-specific inputs */}
             {mode === 'clone' && (
-              <div className="space-y-6 animate-fade-in">
-                <div className="card-gradient p-6">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Copy className="h-5 w-5 text-primary-600" />
-                    <h2 className="text-xl font-bold text-gray-900">Clone a Thumbnail</h2>
+              <div className="space-y-4 sm:space-y-6 animate-fade-in">
+                <div className="card-gradient p-4 sm:p-6">
+                  <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                    <Copy className="h-4 w-4 sm:h-5 sm:w-5 text-primary-600" />
+                    <h2 className="text-lg sm:text-xl font-bold text-gray-900">Clone a Thumbnail</h2>
                   </div>
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     <div>
-                      <label className="label mb-2">YouTube Video URL or Thumbnail URL</label>
+                      <label className="label mb-2 text-sm sm:text-base">YouTube Video URL or Thumbnail URL</label>
                       <div className="relative">
-                        <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                        <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
                         <input
                           type="url"
                           value={cloneUrl}
                           onChange={(e) => setCloneUrl(e.target.value)}
-                          placeholder="https://youtube.com/watch?v=... or https://i.ytimg.com/vi/..."
-                          className="input pl-10"
+                          placeholder="https://youtube.com/watch?v=..."
+                          className="input pl-9 sm:pl-10 text-sm sm:text-base"
                         />
                       </div>
                     </div>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-xs sm:text-sm text-gray-600">
                       💡 Paste a YouTube video URL or direct thumbnail URL. We'll clone the design and let you customize it!
                     </p>
                   </div>
                 </div>
 
                 {/* Image Upload for Clone Mode */}
-                <div className="card-gradient p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Upload Your Images</h3>
-                  <p className="text-sm text-gray-600 mb-4">
+                <div className="card-gradient p-4 sm:p-6">
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">Upload Your Images</h3>
+                  <p className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">
                     Replace elements in the cloned thumbnail with your own images
                   </p>
                   
                   {/* Drag & Drop Area */}
                   <div
-                    className={`relative border-2 border-dashed rounded-xl p-8 text-center transition-all ${
+                    className={`relative border-2 border-dashed rounded-xl p-6 sm:p-8 text-center transition-all ${
                       isDragOver
                         ? 'border-primary-400 bg-primary-50'
                         : 'border-gray-300 hover:border-gray-400 bg-white/50'
@@ -775,11 +819,11 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
                       className="hidden"
                     />
                     
-                    <div className="space-y-3">
-                      <div className="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary-100 to-secondary-100 flex items-center justify-center">
-                        <Upload className="h-8 w-8 text-primary-600" />
+                    <div className="space-y-2 sm:space-y-3">
+                      <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-gradient-to-br from-primary-100 to-secondary-100 flex items-center justify-center">
+                        <Upload className="h-6 w-6 sm:h-8 sm:w-8 text-primary-600" />
                       </div>
-                      <div className="text-sm text-gray-600">
+                      <div className="text-xs sm:text-sm text-gray-600">
                         <button
                           type="button"
                           onClick={openFileDialog}
@@ -787,35 +831,35 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
                         >
                           Click to upload
                         </button>
-                        {' '}or drag and drop
+                        {' '}<span className="hidden sm:inline">or drag and drop</span>
                       </div>
                       <p className="text-xs text-gray-500">
-                        PNG, JPG, GIF up to 10MB each (max 5 images)
+                        PNG, JPG, GIF up to 10MB <span className="hidden sm:inline">each </span>(max 5)
                       </p>
                     </div>
                   </div>
 
                   {/* Uploaded Images Preview */}
                   {uploadedImages.length > 0 && (
-                    <div className="space-y-3 mt-4">
+                    <div className="space-y-2 sm:space-y-3 mt-3 sm:mt-4">
                       <div className="flex items-center justify-between">
-                        <p className="text-sm font-semibold text-gray-700">
-                          Uploaded Images ({uploadedImages.length}/5)
+                        <p className="text-xs sm:text-sm font-semibold text-gray-700">
+                          Uploaded ({uploadedImages.length}/5)
                         </p>
                       </div>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
                         {uploadedImages.map((file, index) => (
                           <div key={index} className="relative group">
                             <img
                               src={URL.createObjectURL(file)}
                               alt={`Upload ${index + 1}`}
-                              className="w-full h-24 object-cover rounded-xl border-2 border-gray-200"
+                              className="w-full h-20 sm:h-24 object-cover rounded-lg sm:rounded-xl border-2 border-gray-200"
                             />
                             <button
                               onClick={() => removeImage(index)}
-                              className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                              className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 bg-red-500 text-white rounded-full p-1 sm:p-1.5 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
                             >
-                              <X className="h-4 w-4" />
+                              <X className="h-3 w-3 sm:h-4 sm:w-4" />
                             </button>
                           </div>
                         ))}
@@ -907,17 +951,17 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
                   <button
                     onClick={handleGenerate}
                     disabled={isGenerating || !cloneUrl.trim() || !prompt.trim()}
-                    className="btn btn-primary btn-lg w-full mt-6"
+                    className="btn btn-primary btn-md sm:btn-lg w-full mt-4 sm:mt-6"
                   >
                     {isGenerating ? (
                       <>
-                        <RefreshCw className="mr-2 h-5 w-5 animate-spin" />
-                        Cloning & Modifying...
+                        <RefreshCw className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
+                        <span className="text-sm sm:text-base">Cloning...</span>
                       </>
                     ) : (
                       <>
-                        <Copy className="mr-2 h-5 w-5" />
-                        Clone & Modify Thumbnail
+                        <Copy className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                        <span className="text-sm sm:text-base">Clone & Modify</span>
                       </>
                     )}
                   </button>
@@ -1286,22 +1330,6 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
                     </div>
                   </div>
 
-              {/* Quick Templates */}
-              <div className="mb-6">
-                <label className="label mb-3">Quick Templates</label>
-                <div className="grid grid-cols-2 gap-2">
-                  {quickTemplates.map((template) => (
-                    <button
-                      key={template.name}
-                      onClick={() => setPrompt(template.prompt)}
-                      className="px-4 py-2 rounded-lg border-2 border-gray-200 hover:border-primary-500 hover:bg-primary-50 text-left text-sm font-medium transition-all"
-                    >
-                      {template.name}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
               {/* Options */}
               <div className="space-y-4 mb-6">
               {/* Aspect Ratio */}
@@ -1381,17 +1409,17 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
               <button
                 onClick={handleGenerate}
                 disabled={isGenerating || !prompt.trim()}
-                className="btn btn-primary btn-lg w-full"
+                className="btn btn-primary btn-md sm:btn-lg w-full"
               >
                 {isGenerating ? (
                   <>
-                    <RefreshCw className="mr-2 h-5 w-5 animate-spin" />
-                    {`Generating ${generateVariants ? '3 Variants' : 'Thumbnail'}...`}
+                    <RefreshCw className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
+                    <span className="text-sm sm:text-base">{`Generating${generateVariants ? ' 3...' : '...'}`}</span>
                   </>
                 ) : (
                   <>
-                    <Sparkles className="mr-2 h-5 w-5" />
-                    {`Generate ${generateVariants ? '3 Variants' : 'Thumbnail'}`}
+                    <Sparkles className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+                    <span className="text-sm sm:text-base">{`Generate${generateVariants ? ' 3 Variants' : ''}`}</span>
                   </>
                 )}
               </button>
@@ -2204,11 +2232,11 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
           </div>
 
           {/* Generated Images Preview */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {mode !== 'analyzer' && mode !== 'extract' && (
               /* Generated Images Preview */
-              <div className="card-gradient p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-6">
+              <div className="card-gradient p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-4 sm:mb-6">
                   {generateVariants ? 'Your 3 Variants' : 'Preview'}
                 </h3>
                 
@@ -2224,14 +2252,14 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
                         />
                         
                         {/* Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                          <div className="absolute bottom-0 left-0 right-0 p-4 space-y-3">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 space-y-2 sm:space-y-3">
                             {generateVariants && (
                               <div className="flex gap-2">
-                                <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs font-bold capitalize">
+                                <span className="px-2 sm:px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs font-bold capitalize">
                                   {image.variantStyle || image.style}
                                 </span>
-                                <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs font-bold">
+                                <span className="px-2 sm:px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs font-bold">
                                   {image.aspectRatio}
                                 </span>
                           </div>
@@ -2239,16 +2267,16 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
                             <div className="flex gap-2">
                     <button
                                 onClick={() => handleDownload(image.url, index)}
-                                className="flex-1 btn btn-primary btn-sm"
+                                className="flex-1 btn btn-primary btn-sm flex items-center justify-center"
                     >
-                      <Download className="mr-2 h-4 w-4" />
-                      Download
+                      <Download className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                      <span className="text-xs sm:text-sm">Download</span>
                     </button>
                     <button
                                 onClick={() => handlePreview(image.url)}
-                                className="btn btn-outline btn-sm bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30"
+                                className="btn btn-outline btn-sm bg-white/20 backdrop-blur-sm border-white/30 text-white hover:bg-white/30 px-2 sm:px-3"
                     >
-                                <Maximize2 className="h-4 w-4" />
+                                <Maximize2 className="h-3 w-3 sm:h-4 sm:w-4" />
                     </button>
                             </div>
                           </div>
@@ -2257,11 +2285,11 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
                         {/* Top badges */}
                         {!generateVariants && (
                           <>
-                            <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/70 backdrop-blur-sm text-white text-xs font-bold">
+                            <div className="absolute top-2 right-2 sm:top-3 sm:right-3 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-black/70 backdrop-blur-sm text-white text-xs font-bold">
                               {image.aspectRatio}
                   </div>
                             {image.facePreservation?.active && (
-                              <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-secondary-600 text-white text-xs font-bold flex items-center gap-1">
+                              <div className="absolute top-2 left-2 sm:top-3 sm:left-3 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-secondary-600 text-white text-xs font-bold flex items-center gap-1">
                                 <CheckCircle2 className="h-3 w-3" />
                                 Face Preserved
                               </div>
@@ -2527,6 +2555,7 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </AuthGuard>
   )
 }

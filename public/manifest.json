@@ -1,0 +1,49 @@
+{
+  "name": "YourThumbnailAI - AI Thumbnail Generator",
+  "short_name": "YourThumbnailAI",
+  "description": "Create stunning AI-generated thumbnails for YouTube, Instagram, and social media in seconds. Free thumbnail maker with no design skills required.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["design", "productivity", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Create Thumbnail",
+      "short_name": "Create",
+      "description": "Start creating a new AI thumbnail",
+      "url": "/generate",
+      "icons": [{ "src": "/favicon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Gallery",
+      "short_name": "Gallery",
+      "description": "Browse thumbnail examples",
+      "url": "/gallery",
+      "icons": [{ "src": "/favicon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Pricing",
+      "short_name": "Pricing",
+      "description": "View pricing plans",
+      "url": "/pricing",
+      "icons": [{ "src": "/favicon.png", "sizes": "96x96" }]
+    }
+  ]
+}
+

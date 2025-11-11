@@ -57,30 +57,35 @@ export async function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl
 
-  // Protected routes that require authentication
-  const protectedRoutes = ['/generate', '/dashboard', '/gallery']
-  const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route))
+  // Public routes that don't require authentication
+  const publicRoutes = ['/', '/auth/signin', '/auth/signup', '/auth/forgot-password', '/terms', '/privacy', '/demo']
+  const isPublicRoute = publicRoutes.some(route => pathname === route || pathname.startsWith('/auth/'))
 
-  // Skip middleware for auth pages
-  if (pathname.startsWith('/auth')) {
+  // API routes and static assets - skip auth check
+  if (pathname.startsWith('/api') || pathname.startsWith('/_next') || pathname.startsWith('/favicon')) {
     return response
   }
 
-  if (isProtectedRoute) {
-    try {
-      const { data: { user } } = await supabase.auth.getUser()
-      
-      if (!user) {
-        // Redirect to signin if not authenticated
-        const signInUrl = new URL('/auth/signin', request.url)
-        signInUrl.searchParams.set('redirectTo', pathname)
-        return NextResponse.redirect(signInUrl)
-      }
-    } catch (error) {
-      console.error('Auth middleware error:', error)
+  // If it's a public route, allow access
+  if (isPublicRoute) {
+    return response
+  }
+
+  // All other routes require authentication
+  try {
+    const { data: { user } } = await supabase.auth.getUser()
+    
+    if (!user) {
+      // Redirect to signin if not authenticated
       const signInUrl = new URL('/auth/signin', request.url)
+      signInUrl.searchParams.set('redirectTo', pathname)
       return NextResponse.redirect(signInUrl)
     }
+  } catch (error) {
+    console.error('Auth middleware error:', error)
+    const signInUrl = new URL('/auth/signin', request.url)
+    signInUrl.searchParams.set('redirectTo', pathname)
+    return NextResponse.redirect(signInUrl)
   }
 
   return response

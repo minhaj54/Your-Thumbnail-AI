@@ -1,15 +1,20 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ArrowRight, Sparkles, Zap, Shield, Users, CheckCircle2, ImagePlus, Wand2, Copy, TrendingUp, Palette, Clock, Download, Play, Instagram } from 'lucide-react'
 import { Navbar } from '@/components/Navbar'
 import { VideoModal } from '@/components/VideoModal'
 import { useAuth } from '@/contexts/AuthContext'
+import { commonFAQs, structuredData } from '@/lib/seo'
+import Script from 'next/script'
 
 export default function HomePage() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
   const { user } = useAuth()
+  
+  // Add FAQ structured data
+  const faqStructuredData = structuredData.faqPage(commonFAQs)
   
   // Determine the destination based on auth status
   const getStartedHref = user ? '/generate' : '/auth/signup'
@@ -18,8 +23,19 @@ export default function HomePage() {
   const videoId = 'rzpz37zGfks'
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <Navbar />
+    <>
+      {/* FAQ Structured Data */}
+      <Script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqStructuredData)
+        }}
+        strategy="afterInteractive"
+      />
+      
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+        <Navbar />
 
       {/* Hero Section with Gradient */}
       <section className="relative overflow-hidden">
@@ -39,12 +55,12 @@ export default function HomePage() {
               <span className="text-sm font-semibold gradient-text">AI-Powered Design Studio</span>
             </div>
 
-            {/* Main Headline */}
-            <h1 className="text-5xl md:text-7xl font-extrabold text-gray-900 leading-tight tracking-tight">
-              Turn Ideas Into{' '}
+            {/* Main Headline - SEO Optimized */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 leading-tight tracking-tight px-4">
+              AI Thumbnail Generator - Turn Ideas Into{' '}
               <span className="relative inline-block">
                 <span className="gradient-text">Viral Thumbnails</span>
-                <svg className="absolute -bottom-2 w-full" viewBox="0 0 200 12" fill="none">
+                <svg className="absolute -bottom-2 w-full hidden sm:block" viewBox="0 0 200 12" fill="none">
                   <path d="M2 10C50 5 150 5 198 10" stroke="url(#gradient)" strokeWidth="4" strokeLinecap="round"/>
                   <defs>
                     <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -58,40 +74,40 @@ export default function HomePage() {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
               Transform simple prompts into professional, high-performing designs with AI magic.{' '}
-              <span className="font-semibold gradient-text">Generate 3 unique variants in seconds.</span>
+              <span className="font-semibold gradient-text">Get 3 free credits - Generate unique variants in seconds.</span>
             </p>
 
             {/* Feature Pills */}
-            <div className="flex flex-wrap justify-center gap-4 text-sm">
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm shadow-md border border-primary-100">
-                <Wand2 className="h-4 w-4 text-primary-600" />
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-sm px-4">
+              <div className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm shadow-md border border-primary-100">
+                <Wand2 className="h-3 w-3 sm:h-4 sm:w-4 text-primary-600" />
                 <span className="font-medium">Magic Prompt</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm shadow-md border border-secondary-100">
-                <ImagePlus className="h-4 w-4 text-secondary-600" />
+              <div className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm shadow-md border border-secondary-100">
+                <ImagePlus className="h-3 w-3 sm:h-4 sm:w-4 text-secondary-600" />
                 <span className="font-medium">3 Style Variants</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm shadow-md border border-accent-100">
-                <Zap className="h-4 w-4 text-accent-600" />
+              <div className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm shadow-md border border-accent-100">
+                <Zap className="h-3 w-3 sm:h-4 sm:w-4 text-accent-600" />
                 <span className="font-medium">Instant Results</span>
               </div>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Link href="/generate" className="btn btn-primary btn-lg group">
-                <Sparkles className="mr-2 h-5 w-5 group-hover:animate-pulse" />
-                Start Creating Now
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center pt-4 px-4">
+              <Link href="/generate" className="btn btn-primary btn-md sm:btn-lg group w-full sm:w-auto">
+                <Sparkles className="mr-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:animate-pulse" />
+                <span className="text-sm sm:text-base">Start Creating Now</span>
+                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <button 
                 onClick={() => setIsVideoModalOpen(true)}
-                className="btn btn-outline btn-lg group"
+                className="btn btn-outline btn-md sm:btn-lg group w-full sm:w-auto"
               >
-                <Play className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                Watch Demo
+                <Play className="mr-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:scale-110 transition-transform" />
+                <span className="text-sm sm:text-base">Watch Demo</span>
               </button>
             </div>
           </div>
@@ -230,7 +246,7 @@ export default function HomePage() {
           <div className="text-center mt-16">
             <Link href="/generate" className="btn btn-primary btn-lg group">
               <Sparkles className="mr-2 h-5 w-5 group-hover:animate-pulse" />
-              Get Started Free
+              Get 3 Free Credits
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -238,24 +254,24 @@ export default function HomePage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600">
+      <section className="py-12 sm:py-16 md:py-20 bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-white mb-2">10K+</div>
-              <div className="text-primary-100 font-medium">Happy Creators</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-2">10K+</div>
+              <div className="text-xs sm:text-sm md:text-base text-primary-100 font-medium">Happy Creators</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-white mb-2">50K+</div>
-              <div className="text-primary-100 font-medium">Thumbnails Created</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-2">50K+</div>
+              <div className="text-xs sm:text-sm md:text-base text-primary-100 font-medium">Thumbnails Created</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-white mb-2">4.9★</div>
-              <div className="text-primary-100 font-medium">Average Rating</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-2">4.9★</div>
+              <div className="text-xs sm:text-sm md:text-base text-primary-100 font-medium">Average Rating</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-white mb-2">3s</div>
-              <div className="text-primary-100 font-medium">Generation Time</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-1 sm:mb-2">3s</div>
+              <div className="text-xs sm:text-sm md:text-base text-primary-100 font-medium">Generation Time</div>
             </div>
           </div>
         </div>
@@ -273,7 +289,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <Link href={getStartedHref} className="btn btn-primary btn-lg group">
               <Sparkles className="mr-2 h-5 w-5 group-hover:animate-pulse" />
-              Get Started Free
+              Get 3 Free Credits
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link href="/pricing" className="btn btn-outline btn-lg">
@@ -284,21 +300,61 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-center gap-4 text-gray-400">
-            <div className="flex items-center gap-3">
-              <a 
-                href="https://www.instagram.com/yourthumbnail.ai?igsh=ajNnZmcwaG5pZ242" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-white transition-colors"
-              >
-                <Instagram className="h-5 w-5" />
-                <span>@yourthumbnail.ai</span>
-              </a>
+      <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+          {/* Footer Content */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 mb-8 sm:mb-12">
+            {/* Brand Section */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center">
+                  <Sparkles className="h-6 w-6 text-white" />
+                </div>
+                <span className="text-xl font-bold">YourThumbnailAI</span>
+              </div>
+              <p className="text-sm text-gray-400 mb-4">
+                Create viral thumbnails in seconds with AI magic. Perfect for YouTube, blogs, and social media.
+              </p>
+              <div className="flex gap-3">
+                <a 
+                  href="https://www.instagram.com/yourthumbnail.ai?igsh=ajNnZmcwaG5pZ242" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-gray-800 hover:bg-gradient-to-br hover:from-primary-500 hover:to-secondary-500 flex items-center justify-center transition-all duration-300 group"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="h-5 w-5 text-gray-400 group-hover:text-white transition-colors" />
+                </a>
+              </div>
             </div>
-            <p>&copy; 2025 YourThumbnailAI. All rights reserved.</p>
+
+            {/* Legal Links */}
+            <div>
+              <h3 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Legal</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/terms" className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                    <Shield className="h-4 w-4" />
+                    Terms of Service
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/privacy" className="text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                    <Shield className="h-4 w-4" />
+                    Privacy Policy
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="border-t border-gray-800 pt-8">
+            <div className="text-center">
+              <p className="text-sm text-gray-400">
+                &copy; {new Date().getFullYear()} YourThumbnailAI. All rights reserved.
+              </p>
+            </div>
           </div>
         </div>
       </footer>
@@ -310,6 +366,7 @@ export default function HomePage() {
         videoId={videoId}
         title="YourThumbnailAI Tutorial"
       />
-    </div>
+      </div>
+    </>
   )
 }

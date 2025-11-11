@@ -63,7 +63,7 @@ export function VideoModal({ isOpen, onClose, videoId, title = "Tutorial Video" 
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4">
       {/* Backdrop */}
       <div 
         className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-300"
@@ -73,19 +73,19 @@ export function VideoModal({ isOpen, onClose, videoId, title = "Tutorial Video" 
       {/* Modal */}
       <div 
         id="video-modal"
-        className="relative w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden animate-scale-in"
+        className="relative w-full max-w-5xl bg-white rounded-lg sm:rounded-2xl shadow-2xl overflow-hidden animate-scale-in"
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
-          <h3 className="text-lg font-semibold flex items-center gap-2">
-            <Play className="h-5 w-5" />
-            {title}
+        <div className="flex items-center justify-between p-3 sm:p-4 bg-gradient-to-r from-primary-600 to-secondary-600 text-white">
+          <h3 className="text-sm sm:text-lg font-semibold flex items-center gap-2">
+            <Play className="h-4 w-4 sm:h-5 sm:w-5" />
+            <span className="truncate">{title}</span>
           </h3>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-white/20 rounded-full transition-colors"
+            className="p-1 sm:p-2 hover:bg-white/20 rounded-full transition-colors flex-shrink-0"
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4 sm:h-5 sm:w-5" />
           </button>
         </div>
 
@@ -104,20 +104,23 @@ export function VideoModal({ isOpen, onClose, videoId, title = "Tutorial Video" 
         </div>
 
         {/* Footer with controls info */}
-        <div className="p-4 bg-gray-50 border-t">
-          <div className="flex items-center justify-between text-sm text-gray-600">
-            <div className="flex items-center gap-4">
+        <div className="p-3 sm:p-4 bg-gray-50 border-t">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs sm:text-sm text-gray-600">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4">
               <div className="flex items-center gap-1">
-                <Play className="h-4 w-4" />
-                <span>Click to play/pause</span>
+                <Play className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden sm:inline">Click to play/pause</span>
+                <span className="sm:hidden">Play/Pause</span>
               </div>
               <div className="flex items-center gap-1">
-                <Volume2 className="h-4 w-4" />
-                <span>Volume controls</span>
+                <Volume2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden sm:inline">Volume controls</span>
+                <span className="sm:hidden">Volume</span>
               </div>
               <div className="flex items-center gap-1">
-                <Maximize2 className="h-4 w-4" />
-                <span>Fullscreen</span>
+                <Maximize2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden sm:inline">Fullscreen</span>
+                <span className="sm:hidden">Fullscreen</span>
               </div>
             </div>
             <div className="text-xs text-gray-500">

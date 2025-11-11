@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
+import { AuthGuard } from '@/components/AuthGuard'
 import { Navbar } from '@/components/Navbar'
 import { useToast } from '@/components/Toast'
-import { Download, Trash2, Plus, Image as ImageIcon, Calendar, Sparkles, TrendingUp, Clock, Zap, Eye, X, User, CreditCard, RefreshCw, EyeOff, LogOut } from 'lucide-react'
+import { Download, Trash2, Plus, Image as ImageIcon, Calendar, Sparkles, TrendingUp, Clock, Zap, Eye, X, User, CreditCard, RefreshCw, EyeOff, LogOut, CheckCircle, XCircle } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useUserProfile, useGeneratedImages, usePaymentHistory } from '@/hooks/useCache'
 
 interface GeneratedImage {
   id: string
@@ -27,51 +29,56 @@ interface UserProfile {
   thumbnails_created?: number
 }
 
+interface PaymentHistory {
+  id: string
+  amount: number
+  currency: string
+  payment_id: string
+  status: string
+  plan_type: string
+  credits: number
+  created_at: string
+}
+
 export default function DashboardPage() {
-  const [images, setImages] = useState<GeneratedImage[]>([])
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  // Use cached data hooks
+  const { profile: userProfile, isLoading: isLoadingProfile, mutate: mutateProfile } = useUserProfile()
+  const { images: cachedImages, isLoading: isLoadingImages, mutate: mutateImages } = useGeneratedImages(1, 5)
+  const { payments: paymentHistory, isLoading: isLoadingBilling, mutate: mutatePayments } = usePaymentHistory()
+  
   const [activeFilter, setActiveFilter] = useState<'all' | 'today' | 'week'>('all')
   const [previewImage, setPreviewImage] = useState<GeneratedImage | null>(null)
   const [activeTab, setActiveTab] = useState<'profile' | 'billing'>('profile')
-  const [showEmail, setShowEmail] = useState(false)
+  const [showEmail, setShowEmail] = useState(true)
   const { user, signOut } = useAuth()
   const { showToast, ToastContainer } = useToast()
   const router = useRouter()
+  
+  const images = cachedImages || []
+  const isLoading = isLoadingProfile || isLoadingImages
 
   const handleSignOut = async () => {
     await signOut()
     router.push('/')
   }
 
-  useEffect(() => {
-    if (user) {
-      loadDashboardData()
-    }
-  }, [user])
-
+  // Refresh functions using SWR mutate
   const loadDashboardData = async () => {
-    setIsLoading(true)
     try {
-      const [profileResponse, imagesResponse] = await Promise.all([
-        fetch('/api/user/profile'),
-        fetch('/api/images/list?page=1&limit=5')
-      ])
-
-      const profileData = await profileResponse.json()
-      const imagesData = await imagesResponse.json()
-
-      if (profileData.success) {
-        setUserProfile(profileData.data)
-      }
-
-      if (imagesData.success) {
-        setImages(imagesData.data)
-      }
+      await Promise.all([mutateProfile(), mutateImages()])
+      showToast('Dashboard refreshed successfully', 'success')
     } catch (error) {
-      console.error('Error loading dashboard data:', error)
-    } finally {
-      setIsLoading(false)
+      console.error('Error refreshing dashboard:', error)
+      showToast('Failed to refresh dashboard', 'error')
+    }
+  }
+
+  const loadBillingHistory = async () => {
+    try {
+      await mutatePayments()
+    } catch (error) {
+      console.error('Error loading billing history:', error)
+      showToast('Failed to load billing history', 'error')
     }
   }
 
@@ -90,7 +97,8 @@ export default function DashboardPage() {
       const data = await response.json()
 
       if (response.ok && data.success) {
-        setImages(images.filter(img => img.id !== imageId))
+        // Invalidate cache to refresh the images list
+        mutateImages()
         showToast('Thumbnail deleted successfully!', 'success')
       } else {
         showToast('Failed to delete thumbnail: ' + (data.error || 'Unknown error'), 'error')
@@ -139,9 +147,9 @@ export default function DashboardPage() {
     const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000)
 
     if (activeFilter === 'today') {
-      return images.filter(img => new Date(img.created_at) >= today)
+      return images.filter((img: any) => new Date(img.created_at) >= today)
     } else if (activeFilter === 'week') {
-      return images.filter(img => new Date(img.created_at) >= weekAgo)
+      return images.filter((img: any) => new Date(img.created_at) >= weekAgo)
     }
     return images
   }
@@ -156,13 +164,13 @@ export default function DashboardPage() {
       free: {
         name: 'Free',
         price: 0,
-        credits: 5,
+        credits: 3,
         description: 'Perfect for trying out',
         features: [
-          '5 credits per month',
+          '3 credits per month',
           '1 thumbnail = 1 credit',
-          'Basic AI features',
-          'Standard quality exports',
+          'AI-powered generation',
+          'High quality exports',
           'Community support',
         ],
       },
@@ -174,10 +182,9 @@ export default function DashboardPage() {
         features: [
           '40 credits per month',
           '1 thumbnail = 1 credit',
-          'Advanced AI features',
+          'AI-powered generation',
           'High quality exports',
           'Priority support',
-          'Custom templates',
         ],
       },
       pro: {
@@ -188,12 +195,9 @@ export default function DashboardPage() {
         features: [
           '150 credits per month',
           '1 thumbnail = 1 credit',
-          'Premium AI features',
-          'Ultra HD exports',
-          'Priority support 24/7',
-          'Custom templates',
-          'Brand kit',
-          'API access',
+          'AI-powered generation',
+          'High quality exports',
+          'Priority support',
         ],
       },
       custom: {
@@ -204,14 +208,9 @@ export default function DashboardPage() {
         features: [
           '350 credits per month',
           '1 thumbnail = 1 credit',
-          'All premium features',
-          'Ultra HD exports',
-          'Dedicated support',
-          'Unlimited templates',
-          'Full brand kit',
-          'API access',
-          'Team collaboration',
-          'Analytics dashboard',
+          'AI-powered generation',
+          'High quality exports',
+          'Priority support',
         ],
       },
     }
@@ -220,8 +219,9 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-      <Navbar />
+    <AuthGuard>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+        <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
@@ -344,7 +344,7 @@ export default function DashboardPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {images.map((image, index) => (
+            {images.map((image: any, index: number) => (
               <div 
                 key={image.id} 
                 className="card group hover:shadow-2xl transition-all duration-300 overflow-hidden animate-fade-in"
@@ -767,12 +767,88 @@ export default function DashboardPage() {
                     })()}
                   </div>
 
-                  <div className="card p-8">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Billing History</h2>
-                    <div className="text-center py-12 text-gray-500">
-                      <CreditCard className="h-12 w-12 mx-auto mb-3 text-gray-400" />
-                      <p>No billing history yet</p>
+                  {/* Payment History */}
+                  <div className="card p-4 sm:p-8">
+                    <div className="flex items-center justify-between mb-4 sm:mb-6">
+                      <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Payment History</h2>
+                      <button
+                        onClick={loadBillingHistory}
+                        disabled={isLoadingBilling}
+                        className="btn btn-outline btn-sm gap-2"
+                      >
+                        <RefreshCw className={`h-4 w-4 ${isLoadingBilling ? 'animate-spin' : ''}`} />
+                        <span className="hidden sm:inline">Refresh</span>
+                      </button>
                     </div>
+                    
+                    {isLoadingBilling ? (
+                      <div className="text-center py-12">
+                        <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary-600 border-t-transparent mx-auto mb-4"></div>
+                        <p className="text-gray-600">Loading payments...</p>
+                      </div>
+                    ) : paymentHistory.length > 0 ? (
+                      <div className="overflow-x-auto">
+                        <table className="w-full">
+                          <thead>
+                            <tr className="border-b-2 border-gray-200">
+                              <th className="text-left p-3 text-xs sm:text-sm font-semibold text-gray-700">Date</th>
+                              <th className="text-left p-3 text-xs sm:text-sm font-semibold text-gray-700">Plan</th>
+                              <th className="text-left p-3 text-xs sm:text-sm font-semibold text-gray-700">Amount</th>
+                              <th className="text-left p-3 text-xs sm:text-sm font-semibold text-gray-700 hidden sm:table-cell">Credits</th>
+                              <th className="text-left p-3 text-xs sm:text-sm font-semibold text-gray-700">Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {paymentHistory.map((payment: any) => (
+                              <tr key={payment.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                                <td className="p-3 text-xs sm:text-sm text-gray-900">
+                                  {new Date(payment.created_at).toLocaleDateString('en-US', {
+                                    month: 'short',
+                                    day: 'numeric',
+                                    year: 'numeric'
+                                  })}
+                                </td>
+                                <td className="p-3 text-xs sm:text-sm text-gray-900 capitalize">
+                                  {payment.plan_type}
+                                </td>
+                                <td className="p-3 text-xs sm:text-sm font-semibold text-gray-900">
+                                  ₹{payment.amount}
+                                </td>
+                                <td className="p-3 text-xs sm:text-sm text-gray-900 hidden sm:table-cell">
+                                  {payment.credits}
+                                </td>
+                                <td className="p-3">
+                                  {payment.status === 'completed' && (
+                                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
+                                      <CheckCircle className="h-3 w-3" />
+                                      <span className="hidden sm:inline">Paid</span>
+                                    </span>
+                                  )}
+                                  {payment.status === 'pending' && (
+                                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-yellow-100 text-yellow-700 text-xs font-semibold">
+                                      <Clock className="h-3 w-3" />
+                                      <span className="hidden sm:inline">Pending</span>
+                                    </span>
+                                  )}
+                                  {payment.status === 'failed' && (
+                                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-red-100 text-red-700 text-xs font-semibold">
+                                      <XCircle className="h-3 w-3" />
+                                      <span className="hidden sm:inline">Failed</span>
+                                    </span>
+                                  )}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    ) : (
+                      <div className="text-center py-12 text-gray-500">
+                        <CreditCard className="h-12 w-12 mx-auto mb-3 text-gray-400" />
+                        <p className="font-medium mb-1">No payment history yet</p>
+                        <p className="text-sm">Your payment transactions will appear here</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
@@ -783,6 +859,7 @@ export default function DashboardPage() {
         {/* Toast Container */}
         <ToastContainer />
       </div>
-    </div>
+      </div>
+    </AuthGuard>
   )
 }

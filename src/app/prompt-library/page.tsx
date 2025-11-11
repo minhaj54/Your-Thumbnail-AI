@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Navbar } from '@/components/Navbar'
+import { AuthGuard } from '@/components/AuthGuard'
 import { useToast } from '@/components/Toast'
 import { Copy, Search, Clock, TrendingUp, Sparkles, Eye, Maximize2, X, FileText, BookOpen } from 'lucide-react'
 import Link from 'next/link'
@@ -20,23 +21,31 @@ type SortType = 'recent' | 'popular'
 
 export default function PromptLibraryPage() {
   const [prompts, setPrompts] = useState<PromptLibraryItem[]>([])
-  const [filteredPrompts, setFilteredPrompts] = useState<PromptLibraryItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0)
+  const [totalCount, setTotalCount] = useState(0)
   const [hasMore, setHasMore] = useState(true)
   const [selectedSort, setSelectedSort] = useState<SortType>('recent')
   const [searchQuery, setSearchQuery] = useState('')
+  const [debouncedSearch, setDebouncedSearch] = useState('')
   const [selectedPrompt, setSelectedPrompt] = useState<PromptLibraryItem | null>(null)
   const { showToast, ToastContainer } = useToast()
 
+  // Debounce search query
   useEffect(() => {
-    loadPrompts()
-  }, [selectedSort])
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchQuery)
+    }, 500) // Wait 500ms after user stops typing
 
+    return () => clearTimeout(timer)
+  }, [searchQuery])
+
+  // Reload prompts when sort or search changes
   useEffect(() => {
-    filterPrompts()
-  }, [prompts, searchQuery])
+    loadPrompts(true)
+  }, [selectedSort, debouncedSearch])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,27 +69,37 @@ export default function PromptLibraryPage() {
     if (reset) {
       setIsLoading(true)
       setCurrentPage(1)
+      setPrompts([]) // Clear existing prompts
     } else {
       setIsLoadingMore(true)
     }
 
     try {
-      const response = await fetch(`/api/prompt-library/list?page=${reset ? 1 : currentPage + 1}&limit=20&sort=${selectedSort}`)
+      const page = reset ? 1 : currentPage + 1
+      const searchParam = debouncedSearch ? `&search=${encodeURIComponent(debouncedSearch)}` : ''
+      const response = await fetch(`/api/prompt-library/list?page=${page}&limit=12&sort=${selectedSort}${searchParam}`)
       const data = await response.json()
 
       if (data.success) {
+        const newPrompts = data.data.prompts || []
+        
         if (reset) {
-          setPrompts(data.data.prompts)
+          setPrompts(newPrompts)
         } else {
-          setPrompts(prev => [...prev, ...data.data.prompts])
+          setPrompts(prev => [...prev, ...newPrompts])
         }
+        
         setHasMore(data.data.pagination.hasMore)
         setCurrentPage(data.data.pagination.page)
+        setTotalPages(data.data.pagination.totalPages)
+        setTotalCount(data.data.pagination.total)
       } else {
         console.error('Failed to load prompts:', data.error)
+        showToast('Failed to load prompts', 'error')
       }
     } catch (error) {
       console.error('Error loading prompts:', error)
+      showToast('Failed to load prompts', 'error')
     } finally {
       setIsLoading(false)
       setIsLoadingMore(false)
@@ -93,18 +112,21 @@ export default function PromptLibraryPage() {
     }
   }
 
-  const filterPrompts = () => {
-    if (!searchQuery.trim()) {
-      setFilteredPrompts(prompts)
-      return
-    }
-
-    const query = searchQuery.toLowerCase().trim()
-    const filtered = prompts.filter(prompt =>
-      prompt.extracted_prompt.toLowerCase().includes(query)
-    )
-    setFilteredPrompts(filtered)
-  }
+  // Skeleton loader component
+  const SkeletonCard = () => (
+    <div className="card overflow-hidden animate-pulse">
+      <div className="aspect-video bg-gray-200"></div>
+      <div className="p-4 sm:p-6 space-y-3">
+        <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+        <div className="h-4 bg-gray-200 rounded w-full"></div>
+        <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+        <div className="flex gap-2 mt-4">
+          <div className="h-10 bg-gray-200 rounded flex-1"></div>
+          <div className="h-10 bg-gray-200 rounded flex-1"></div>
+        </div>
+      </div>
+    </div>
+  )
 
   const copyPrompt = async (prompt: string) => {
     try {
@@ -139,8 +161,9 @@ export default function PromptLibraryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
-      <Navbar />
+    <AuthGuard>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
+        <Navbar />
       <ToastContainer />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -157,6 +180,26 @@ export default function PromptLibraryPage() {
           </p>
         </div>
 
+        {/* Stats */}
+        {!isLoading && (
+          <div className="flex items-center justify-center gap-6 mb-6">
+            <div className="flex items-center gap-2 text-gray-600">
+              <BookOpen className="h-5 w-5" />
+              <span className="text-sm font-medium">
+                {totalCount} {totalCount === 1 ? 'Prompt' : 'Prompts'}
+                {debouncedSearch && ` found`}
+              </span>
+            </div>
+            {totalPages > 1 && (
+              <div className="flex items-center gap-2 text-gray-600">
+                <span className="text-sm font-medium">
+                  Page {currentPage} of {totalPages}
+                </span>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Search and Sort */}
         <div className="mb-8 space-y-4">
           <div className="flex flex-col md:flex-row gap-4">
@@ -168,17 +211,23 @@ export default function PromptLibraryPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search prompts..."
-                className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:ring-4 focus:ring-primary-100 transition-all"
+                className="w-full pl-12 pr-12 py-3 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:ring-4 focus:ring-primary-100 transition-all"
               />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                  title="Clear search"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              )}
             </div>
 
             {/* Sort */}
             <div className="flex gap-2">
               <button
-                onClick={() => {
-                  setSelectedSort('recent')
-                  loadPrompts(true)
-                }}
+                onClick={() => setSelectedSort('recent')}
                 className={`px-6 py-3 rounded-xl font-medium transition-all flex items-center gap-2 ${
                   selectedSort === 'recent'
                     ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-md'
@@ -189,10 +238,7 @@ export default function PromptLibraryPage() {
                 Recent
               </button>
               <button
-                onClick={() => {
-                  setSelectedSort('popular')
-                  loadPrompts(true)
-                }}
+                onClick={() => setSelectedSort('popular')}
                 className={`px-6 py-3 rounded-xl font-medium transition-all flex items-center gap-2 ${
                   selectedSort === 'popular'
                     ? 'bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-md'
@@ -209,22 +255,30 @@ export default function PromptLibraryPage() {
         {/* Prompts Grid */}
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="card p-4 animate-pulse">
-                <div className="bg-gray-200 rounded-xl h-48 mb-4"></div>
-                <div className="bg-gray-200 rounded h-4 mb-2"></div>
-                <div className="bg-gray-200 rounded h-4 w-3/4"></div>
-              </div>
+            {Array.from({ length: 12 }).map((_, index) => (
+              <SkeletonCard key={index} />
             ))}
           </div>
-        ) : filteredPrompts.length === 0 ? (
-          <div className="text-center py-16">
-            <FileText className="h-16 w-16 mx-auto mb-4 text-gray-400" />
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">No prompts found</h3>
+        ) : prompts.length === 0 ? (
+          <div className="text-center py-20">
+            <FileText className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              {debouncedSearch ? 'No prompts found' : 'No prompts available'}
+            </h3>
             <p className="text-gray-600 mb-6">
-              {searchQuery ? 'Try a different search term' : 'Be the first to add a prompt to the library!'}
+              {debouncedSearch 
+                ? `No results for "${debouncedSearch}". Try a different search term.`
+                : 'Prompts will appear here once added to the library.'}
             </p>
-            {!searchQuery && (
+            {debouncedSearch && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="btn btn-outline"
+              >
+                Clear Search
+              </button>
+            )}
+            {!debouncedSearch && (
               <Link href="/generate?mode=extract" className="btn btn-primary">
                 Extract Your First Prompt
               </Link>
@@ -233,7 +287,7 @@ export default function PromptLibraryPage() {
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredPrompts.map((prompt) => (
+              {prompts.map((prompt) => (
                 <div
                   key={prompt.id}
                   className="card-gradient p-6 hover:shadow-xl transition-all duration-300 group animate-fade-in"
@@ -291,13 +345,32 @@ export default function PromptLibraryPage() {
               ))}
             </div>
 
-            {/* Load More */}
+            {/* Load More / Loading Indicator */}
             {isLoadingMore && (
-              <div className="text-center py-8">
-                <div className="inline-flex items-center gap-2 text-gray-600">
-                  <div className="w-5 h-5 border-2 border-primary-600 border-t-transparent rounded-full animate-spin"></div>
-                  <span>Loading more prompts...</span>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                {Array.from({ length: 6 }).map((_, index) => (
+                  <SkeletonCard key={`loading-${index}`} />
+                ))}
+              </div>
+            )}
+
+            {/* Load More Button (optional - for manual loading) */}
+            {!isLoadingMore && hasMore && prompts.length >= 12 && (
+              <div className="mt-12 text-center">
+                <button
+                  onClick={() => loadPrompts(false)}
+                  className="btn btn-outline inline-flex items-center gap-2 group"
+                >
+                  <Sparkles className="h-5 w-5 group-hover:animate-pulse" />
+                  Load More Prompts
+                </button>
+              </div>
+            )}
+
+            {/* End of Results */}
+            {!hasMore && prompts.length > 0 && (
+              <div className="mt-12 text-center text-gray-500">
+                <p className="text-sm">You've reached the end of the library</p>
               </div>
             )}
           </>
@@ -372,7 +445,8 @@ export default function PromptLibraryPage() {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </AuthGuard>
   )
 }
 
