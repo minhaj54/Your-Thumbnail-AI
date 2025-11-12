@@ -5,11 +5,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const currentDate = new Date().toISOString()
 
   return [
+    // Homepage - Highest Priority
     {
       url: baseUrl,
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 1.0,
+    },
+    
+    // Main Feature Pages - High Priority
+    {
+      url: `${baseUrl}/generate`,
+      lastModified: currentDate,
+      changeFrequency: 'weekly',
+      priority: 0.95,
     },
     {
       url: `${baseUrl}/pricing`,
@@ -21,13 +30,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/gallery`,
       lastModified: currentDate,
       changeFrequency: 'daily',
-      priority: 0.8,
+      priority: 0.85,
     },
     {
       url: `${baseUrl}/prompt-library`,
       lastModified: currentDate,
       changeFrequency: 'daily',
-      priority: 0.8,
+      priority: 0.85,
+    },
+    
+    // Auth Pages - Medium Priority
+    {
+      url: `${baseUrl}/auth/signup`,
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/auth/signin`,
@@ -35,12 +52,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
-    {
-      url: `${baseUrl}/auth/signup`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
+    
+    // Legal Pages - Low Priority
     {
       url: `${baseUrl}/terms`,
       lastModified: currentDate,

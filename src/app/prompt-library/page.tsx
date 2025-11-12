@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { Navbar } from '@/components/Navbar'
-import { AuthGuard } from '@/components/AuthGuard'
 import { useToast } from '@/components/Toast'
 import { Copy, Search, Clock, TrendingUp, Sparkles, Eye, Maximize2, X, FileText, BookOpen } from 'lucide-react'
 import Link from 'next/link'
@@ -161,9 +160,8 @@ export default function PromptLibraryPage() {
   }
 
   return (
-    <AuthGuard>
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
-        <Navbar />
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
+      <Navbar />
       <ToastContainer />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -445,8 +443,7 @@ export default function PromptLibraryPage() {
           </div>
         </div>
       )}
-      </div>
-    </AuthGuard>
+    </div>
   )
 }
 

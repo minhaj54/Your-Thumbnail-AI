@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
-import { AuthGuard } from '@/components/AuthGuard'
 import { Navbar } from '@/components/Navbar'
 import { useToast } from '@/components/Toast'
 import { Download, Trash2, Image as ImageIcon, Grid3x3, LayoutGrid, Filter, Search, Clock, Sparkles, Heart, Eye, X } from 'lucide-react'
@@ -204,9 +203,8 @@ export default function GalleryPage() {
   }
 
   return (
-    <AuthGuard>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-        <Navbar />
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
@@ -543,8 +541,7 @@ export default function GalleryPage() {
 
       {/* Toast Container */}
       <ToastContainer />
-      </div>
-    </AuthGuard>
+    </div>
   )
 }
 

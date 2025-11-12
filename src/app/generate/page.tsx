@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Sparkles, Download, RefreshCw, Wand2, Upload, X, Image as ImageIcon, Zap, Copy, Link as LinkIcon, Palette, Clock, CheckCircle2, Maximize2, Loader2, FileText } from 'lucide-react'
+import { Sparkles, Download, RefreshCw, Wand2, Upload, X, Image as ImageIcon, Zap, Copy, Link as LinkIcon, Palette, Clock, CheckCircle2, Maximize2, Loader2, FileText, LogIn } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 import { Navbar } from '@/components/Navbar'
-import { AuthGuard } from '@/components/AuthGuard'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 type ImageGenerationOptions = {
   style?: 'realistic' | 'artistic' | 'minimalist' | 'vibrant' | 'professional'
@@ -16,6 +17,8 @@ type ImageGenerationOptions = {
 type GenerationMode = 'create' | 'clone' | 'analyzer' | 'extract'
 
 export default function GeneratePage() {
+  const { user } = useAuth()
+  const router = useRouter()
   const [mode, setMode] = useState<GenerationMode>('create')
   const [prompt, setPrompt] = useState('')
   const [style, setStyle] = useState<ImageGenerationOptions['style']>('professional')
@@ -28,6 +31,7 @@ export default function GeneratePage() {
   const [error, setError] = useState('')
   const [loadingProgress, setLoadingProgress] = useState(0)
   const [loadingMessage, setLoadingMessage] = useState('')
+  const [showAuthPrompt, setShowAuthPrompt] = useState(false)
   const [uploadedImages, setUploadedImages] = useState<File[]>([])
   const [cloneUrl, setCloneUrl] = useState('')
   const [isDragOver, setIsDragOver] = useState(false)
@@ -47,8 +51,6 @@ export default function GeneratePage() {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const analyzerFileInputRef = useRef<HTMLInputElement>(null)
   const extractFileInputRef = useRef<HTMLInputElement>(null)
-  
-  const { user } = useAuth()
 
   // Check for saved prompt from library on mount
   useEffect(() => {
@@ -139,6 +141,12 @@ export default function GeneratePage() {
   }
 
   const handleGenerate = async () => {
+    // Check if user is logged in
+    if (!user) {
+      setShowAuthPrompt(true)
+      return
+    }
+
     // Validation based on mode
     if (mode === 'create' && !prompt.trim()) {
       setError('Please enter a prompt')
@@ -441,6 +449,12 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
   }
 
   const handleAnalyze = async () => {
+    // Check if user is logged in
+    if (!user) {
+      setShowAuthPrompt(true)
+      return
+    }
+
     setIsAnalyzing(true)
     setError('')
     setAnalysisResult(null)
@@ -511,6 +525,12 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
   }
 
   const handleExtractPrompt = async () => {
+    // Check if user is logged in
+    if (!user) {
+      setShowAuthPrompt(true)
+      return
+    }
+
     setIsExtracting(true)
     setError('')
     setExtractedPrompt(null)
@@ -647,9 +667,8 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
   }
 
   return (
-    <AuthGuard>
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
-        <Navbar />
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <Navbar />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
@@ -2555,7 +2574,44 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
           </div>
         </div>
       )}
+
+      {/* Auth Prompt Modal */}
+      {showAuthPrompt && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl animate-fade-in">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <LogIn className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Sign In Required</h3>
+              <p className="text-gray-600 mb-6">
+                Please sign in to start generating amazing thumbnails with AI. It's free to get started with 3 credits!
+              </p>
+              <div className="flex flex-col gap-3">
+                <Link
+                  href="/auth/signup"
+                  className="btn btn-primary w-full flex items-center justify-center gap-2"
+                >
+                  <Sparkles className="h-5 w-5" />
+                  Sign Up - Get 3 Free Credits
+                </Link>
+                <Link
+                  href="/auth/signin"
+                  className="btn btn-outline w-full"
+                >
+                  Sign In
+                </Link>
+                <button
+                  onClick={() => setShowAuthPrompt(false)}
+                  className="text-gray-500 hover:text-gray-700 text-sm"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       </div>
-    </AuthGuard>
   )
 }

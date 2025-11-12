@@ -57,37 +57,36 @@ export async function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl
 
-  // Public routes that don't require authentication
-  const publicRoutes = ['/', '/auth/signin', '/auth/signup', '/auth/forgot-password', '/terms', '/privacy', '/demo']
-  const isPublicRoute = publicRoutes.some(route => pathname === route || pathname.startsWith('/auth/'))
+  // Protected routes that require authentication for viewing
+  // Only dashboard and profile need authentication to VIEW
+  const protectedRoutes = ['/dashboard', '/profile']
+  const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route))
 
   // API routes and static assets - skip auth check
-  if (pathname.startsWith('/api') || pathname.startsWith('/_next') || pathname.startsWith('/favicon')) {
+  if (pathname.startsWith('/api') || pathname.startsWith('/_next') || pathname.startsWith('/favicon') || pathname.startsWith('/icon')) {
     return response
   }
 
-  // If it's a public route, allow access
-  if (isPublicRoute) {
-    return response
-  }
-
-  // All other routes require authentication
-  try {
-    const { data: { user } } = await supabase.auth.getUser()
-    
-    if (!user) {
-      // Redirect to signin if not authenticated
+  // Check if user is authenticated for protected routes
+  if (isProtectedRoute) {
+    try {
+      const { data: { user } } = await supabase.auth.getUser()
+      
+      if (!user) {
+        // Redirect to signin if not authenticated
+        const signInUrl = new URL('/auth/signin', request.url)
+        signInUrl.searchParams.set('redirectTo', pathname)
+        return NextResponse.redirect(signInUrl)
+      }
+    } catch (error) {
+      console.error('Auth middleware error:', error)
       const signInUrl = new URL('/auth/signin', request.url)
       signInUrl.searchParams.set('redirectTo', pathname)
       return NextResponse.redirect(signInUrl)
     }
-  } catch (error) {
-    console.error('Auth middleware error:', error)
-    const signInUrl = new URL('/auth/signin', request.url)
-    signInUrl.searchParams.set('redirectTo', pathname)
-    return NextResponse.redirect(signInUrl)
   }
 
+  // All other routes are publicly viewable (generate, gallery, pricing, etc.)
   return response
 }
 
