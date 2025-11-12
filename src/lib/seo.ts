@@ -4,7 +4,7 @@ export const siteConfig = {
   name: 'YourThumbnailAI',
   title: 'YourThumbnailAI - AI-Powered Thumbnail Generator | Create Viral Thumbnails in Seconds',
   description: 'Create stunning AI-generated thumbnails for YouTube, Instagram, and social media in seconds. Free AI thumbnail maker with advanced customization. No design skills needed.',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://yourthumbnailai.com',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://yourthumbnail.com',
   ogImage: '/og-image.jpg',
   keywords: [
     'AI thumbnail generator',
@@ -52,7 +52,7 @@ export const structuredData = {
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'Customer Support',
-      email: 'support@yourthumbnailai.com',
+      email: 'support@yourthumbnail.com',
       availableLanguage: 'English'
     }
   },

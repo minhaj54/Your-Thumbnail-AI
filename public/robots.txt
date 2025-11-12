@@ -21,7 +21,7 @@ Allow: /auth/signin
 Allow: /auth/signup
 
 # Sitemap location
-Sitemap: https://yourthumbnailai.com/sitemap.xml
+Sitemap: https://yourthumbnail.com/sitemap.xml
 
 # Crawl-delay for specific bots (optional)
 User-agent: Googlebot

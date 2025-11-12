@@ -112,8 +112,8 @@ Complete SEO optimization has been implemented to make YourThumbnailAI fully ind
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "YourThumbnailAI",
-  "url": "https://yourthumbnailai.com",
-  "logo": "https://yourthumbnailai.com/logo.png",
+  "url": "https://yourthumbnail.com",
+  "logo": "https://yourthumbnail.com/logo.png",
   "description": "AI-powered thumbnail generator"
 }
 ```
@@ -213,11 +213,11 @@ To complete SEO setup:
 
 1. **Submit Sitemap to Google**
    - Go to Google Search Console
-   - Add property: `yourthumbnailai.com`
-   - Submit sitemap: `https://yourthumbnailai.com/sitemap.xml`
+   - Add property: `yourthumbnail.com`
+   - Submit sitemap: `https://yourthumbnail.com/sitemap.xml`
 
 2. **Verify robots.txt**
-   - Test: `https://yourthumbnailai.com/robots.txt`
+   - Test: `https://yourthumbnail.com/robots.txt`
    - Ensure Google can access
 
 3. **Request Indexing**

@@ -11,7 +11,7 @@ Quick guide to get YourThumbnailAI indexed and ranking on Google.
 2. **Add Your Property**
    - Click "Add Property"
    - Select "URL prefix"
-   - Enter: `https://yourthumbnailai.com`
+   - Enter: `https://yourthumbnail.com`
    - Click "Continue"
 
 3. **Verify Ownership**
@@ -56,10 +56,10 @@ Manually request indexing for important pages:
 1. **In Google Search Console**
    - Click "URL Inspection" at the top
    - Enter URL (one at a time):
-     - `https://yourthumbnailai.com/`
-     - `https://yourthumbnailai.com/pricing`
-     - `https://yourthumbnailai.com/gallery`
-     - `https://yourthumbnailai.com/prompt-library`
+     - `https://yourthumbnail.com/`
+     - `https://yourthumbnail.com/pricing`
+     - `https://yourthumbnail.com/gallery`
+     - `https://yourthumbnail.com/prompt-library`
 
 2. **For Each URL**
    - Wait for inspection to complete
@@ -254,7 +254,7 @@ Before considering setup complete:
 
 **Need Help?**
 - Google Search Console Help: https://support.google.com/webmasters
-- YourThumbnailAI Support: support@yourthumbnailai.com
+- YourThumbnailAI Support: support@yourthumbnail.com
 
 **Last Updated**: November 11, 2025
 
