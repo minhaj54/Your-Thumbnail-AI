@@ -19,8 +19,8 @@ export default function HomePage() {
   // Determine the destination based on auth status
   const getStartedHref = user ? '/generate' : '/auth/signup'
   
-  // Extract video ID from the YouTube URL
-  const videoId = 'rzpz37zGfks'
+  // Get video ID from environment variable with fallback
+  const videoId = process.env.NEXT_PUBLIC_DEMO_VIDEO_ID || 'rzpz37zGfks'
 
   return (
     <>
