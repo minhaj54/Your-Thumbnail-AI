@@ -27,7 +27,13 @@ export async function POST(request: NextRequest) {
     const aspectRatio = formData.get('aspectRatio') as string
     const size = formData.get('size') as string
     const quality = formData.get('quality') as string
+    const cloneReferenceCountRaw = formData.get('cloneReferenceCount')
     const images = formData.getAll('images') as File[]
+
+    const requestedCloneReferenceCount =
+      typeof cloneReferenceCountRaw === 'string'
+        ? parseInt(cloneReferenceCountRaw, 10) || 0
+        : 0
 
     // Validate required fields
     if (!prompt || typeof prompt !== 'string') {
@@ -46,17 +52,28 @@ export async function POST(request: NextRequest) {
 
     // Process uploaded images
     let imageData = ''
+    const totalImages = images.length
+    const referenceImagesCount = Math.max(
+      0,
+      Math.min(requestedCloneReferenceCount, totalImages)
+    )
+    const faceReferenceCount = Math.max(0, totalImages - referenceImagesCount)
+    const hasCloneReference = referenceImagesCount > 0
+    const hasFaceReferences = faceReferenceCount > 0
     
-    console.log(`Processing ${images.length} uploaded images for face preservation`)
+    console.log(
+      `Processing ${images.length} uploaded images for face preservation (style references: ${referenceImagesCount}, face references: ${faceReferenceCount})`
+    )
     
     // Convert uploaded images to base64 for AI processing
     try {
-      const imagePromises = images.map(async (image) => {
+      const imagePromises = images.map(async (image, index) => {
         const arrayBuffer = await image.arrayBuffer()
         const base64 = Buffer.from(arrayBuffer).toString('base64')
         return {
           mimeType: image.type,
-          data: base64
+          data: base64,
+          role: index < referenceImagesCount ? 'style-reference' : 'face-reference'
         }
       })
       
@@ -71,8 +88,56 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Enhanced prompt for face preservation
-    const finalPrompt = `🎭 FACE PRESERVATION MODE ACTIVATED 🎭
+    // Enhanced prompt that handles clone style references + face replacement requirements
+    const cloneReferenceLabel =
+      referenceImagesCount === 1
+        ? '#1'
+        : `#1-#${referenceImagesCount}`
+    const faceReferenceStartIndex = referenceImagesCount + 1
+    const faceReferenceLabel = hasFaceReferences
+      ? faceReferenceCount === 1
+        ? `#${faceReferenceStartIndex}`
+        : `#${faceReferenceStartIndex}-#${totalImages}`
+      : ''
+
+    let finalPrompt = ''
+
+    if (hasCloneReference) {
+      finalPrompt = `🧬 THUMBNAIL CLONE MODE ACTIVATED 🧬
+
+Reference image(s) ${cloneReferenceLabel} show the ORIGINAL thumbnail design. Recreate their exact layout, typography, color palette, lighting, effects, depth, and overall composition while applying the user instructions below.
+
+USER MODIFICATION REQUEST:
+${prompt}
+
+STYLE & STRUCTURE REQUIREMENTS:
+- Match the same aspect ratio (${aspectRatio || '16:9'}) and framing
+- Preserve the layout grid, text placement, and sizing exactly
+- Reproduce the same lighting, shadows, glow, and polish
+- Keep the same color grading, contrast, and energy
+- Maintain the same hierarchy, spacing, and focal balance
+`
+
+      if (hasFaceReferences) {
+        finalPrompt += `
+🎭 FACE REPLACEMENT REQUIREMENTS 🎭
+- Additional reference image(s) ${faceReferenceLabel} contain the PERSON that must replace the subject from the original thumbnail
+- Use the EXACT identity, facial structure, expression, skin tone, and hairstyle from the face reference(s)
+- Seamlessly blend the new face into the cloned composition with identical lighting and perspective
+- The new face must be the PRIMARY FOCUS; do NOT keep or reuse the face from the original reference once a user face is provided
+- Ensure the inserted face feels naturally photographed inside the cloned layout`
+      } else {
+        finalPrompt += `
+SUBJECT GUIDANCE:
+- Keep the subject posing, energy, and attitude consistent with the original thumbnail
+- Apply the user's requested tweaks without deviating from the core design DNA`
+      }
+
+      finalPrompt += `
+
+Deliver a single finished thumbnail that looks like a true evolution of the reference image(s) while reflecting all requested edits.`
+    } else {
+      finalPrompt = `🎭 FACE PRESERVATION MODE ACTIVATED 🎭
 
 ${prompt}
 
@@ -91,6 +156,7 @@ ${prompt}
 - Preserve the person's expression, pose, and distinctive characteristics exactly
 
 The user has uploaded ${images.length} reference image(s) containing faces that MUST be preserved and featured prominently in the thumbnail.`
+    }
 
     const options: ImageGenerationOptions = {
       prompt: finalPrompt,

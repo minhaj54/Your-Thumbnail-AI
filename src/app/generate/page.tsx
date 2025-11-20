@@ -280,6 +280,7 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
         formData.append('aspectRatio', aspectRatio || '16:9')
         formData.append('size', size || 'medium')
         formData.append('quality', quality || 'high')
+        formData.append('cloneReferenceCount', '1')
         
         // Add the cloned thumbnail as the first image (most important reference)
         formData.append('images', clonedThumbnailFile)
