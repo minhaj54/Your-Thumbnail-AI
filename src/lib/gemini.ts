@@ -35,11 +35,12 @@ export class GeminiImageGenerator {
 
   constructor() {
     this.model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
-    this.imageModel = genAI.getGenerativeModel({ model: 'gemini-2.5-flash-image' })
+    this.imageModel = genAI.getGenerativeModel({ model: 'gemini-3-pro-image-preview' })
   }
 
   /**
-   * Generate an image using Gemini 2.5 Flash Image with proper API integration
+   * Generate an image using Gemini 3 Pro Image Preview with proper API integration
+   * Supports up to 4K resolution, real-world grounding, and advanced image generation
    */
   async generateImage(options: ImageGenerationOptions): Promise<GeneratedImage> {
     const { prompt, style = 'professional', aspectRatio = '16:9', size = 'medium', quality = 'high', imageData, userId } = options
@@ -78,12 +79,16 @@ export class GeminiImageGenerator {
         }
       }
 
-      // Generate image using Gemini 2.5 Flash Image
+      // Generate image using Gemini 3 Pro Image Preview
+      // Note: Gemini 3 Pro Image Preview supports 1K, 2K, and 4K resolutions
+      // Default is 1K resolution. You can specify resolution in imageConfig if needed.
       const result = await this.imageModel.generateContent({
         contents: contentArray,
         generationConfig: {
           imageConfig: {
             aspectRatio: this.mapAspectRatio(aspectRatio)
+            // Optional: Add resolution for higher quality (1K default, 2K, or 4K)
+            // resolution: this.mapResolution(size, quality)
           }
         }
       })
@@ -98,7 +103,7 @@ export class GeminiImageGenerator {
           for (const part of content.parts) {
             if (part.inlineData && part.inlineData.data) {
               const imageUrl = `data:image/png;base64,${part.inlineData.data}`
-              console.log(`✅ Successfully generated image with Gemini 2.5 Flash Image`)
+              console.log(`✅ Successfully generated image with Gemini 3 Pro Image Preview`)
               
               // Upload to Supabase Storage if userId is provided
               let finalUrl = imageUrl
@@ -146,7 +151,7 @@ export class GeminiImageGenerator {
   }
 
   /**
-   * Enhance prompt using Gemini 2.5 Flash
+   * Enhance prompt using Gemini 2.5 Flash (text model for prompt enhancement)
    */
   private async enhancePrompt(
     prompt: string, 

@@ -195,25 +195,83 @@ export default function GeneratePage() {
           setLoadingMessage('Found the thumbnail! Downloading...')
         }
 
-        // Fetch the thumbnail image and convert to File
+        // Fetch the thumbnail image and convert to File with retry logic
         setLoadingProgress(40)
         setLoadingMessage('Downloading the thumbnail to clone...')
         
         let clonedThumbnailFile: File | null = null
-        try {
-          // For YouTube thumbnails, try maxresdefault first, then fallback to hqdefault
-          let thumbnailResponse = await fetch(thumbnailUrl)
+        
+        // Retry function with exponential backoff
+        const fetchWithRetry = async (url: string, maxRetries = 3, retryDelay = 1000): Promise<Response> => {
+          let lastError: Error | null = null
           
-          // If maxresdefault fails for YouTube, try hqdefault
-          if (!thumbnailResponse.ok && match && match[1]) {
-            const videoId = match[1]
-            const fallbackUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
-            setLoadingMessage('Trying alternative thumbnail quality...')
-            thumbnailResponse = await fetch(fallbackUrl)
+          for (let attempt = 1; attempt <= maxRetries; attempt++) {
+            try {
+              if (attempt > 1) {
+                setLoadingMessage(`Retrying thumbnail download... (Attempt ${attempt}/${maxRetries})`)
+                await new Promise(resolve => setTimeout(resolve, retryDelay * attempt))
+              }
+              
+              const response = await fetch(url, {
+                method: 'GET',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'omit',
+                headers: {
+                  'Accept': 'image/*',
+                }
+              })
+              
+              if (response.ok) {
+                return response
+              }
+              
+              // If it's the last attempt, throw the error
+              if (attempt === maxRetries) {
+                throw new Error(`Failed to fetch thumbnail: ${response.status} ${response.statusText}`)
+              }
+              
+              lastError = new Error(`Attempt ${attempt} failed: ${response.status} ${response.statusText}`)
+            } catch (error) {
+              lastError = error instanceof Error ? error : new Error('Unknown fetch error')
+              
+              // If it's the last attempt, throw the error
+              if (attempt === maxRetries) {
+                throw lastError
+              }
+            }
           }
           
-          if (!thumbnailResponse.ok) {
-            throw new Error(`Failed to fetch thumbnail: ${thumbnailResponse.status} ${thumbnailResponse.statusText}`)
+          throw lastError || new Error('Failed to fetch thumbnail after all retries')
+        }
+        
+        try {
+          let thumbnailResponse: Response | null = null
+          
+          // For YouTube thumbnails, try maxresdefault first, then fallback to hqdefault
+          try {
+            thumbnailResponse = await fetchWithRetry(thumbnailUrl)
+          } catch (firstError) {
+            // If maxresdefault fails for YouTube, try hqdefault
+            if (match && match[1]) {
+              const videoId = match[1]
+              const fallbackUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`
+              setLoadingMessage('Trying alternative thumbnail quality...')
+              try {
+                thumbnailResponse = await fetchWithRetry(fallbackUrl)
+              } catch (fallbackError) {
+                // If both fail, try sddefault as last resort
+                const sdDefaultUrl = `https://i.ytimg.com/vi/${videoId}/sddefault.jpg`
+                setLoadingMessage('Trying standard quality thumbnail...')
+                thumbnailResponse = await fetchWithRetry(sdDefaultUrl)
+              }
+            } else {
+              throw firstError
+            }
+          }
+          
+          if (!thumbnailResponse || !thumbnailResponse.ok) {
+            throw new Error(`Failed to fetch thumbnail: ${thumbnailResponse?.status || 'Unknown error'}`)
           }
           
           // Check if the response is actually an image
@@ -222,18 +280,28 @@ export default function GeneratePage() {
             throw new Error('URL does not point to a valid image')
           }
           
+          // Ensure response body is fully loaded
           const thumbnailBlob = await thumbnailResponse.blob()
           
-          // Validate blob is not empty
+          // Validate blob is not empty and has reasonable size
           if (thumbnailBlob.size === 0) {
             throw new Error('Thumbnail file is empty')
           }
           
-          // Convert blob to File
+          // Validate blob size is reasonable (at least 1KB, max 50MB)
+          if (thumbnailBlob.size < 1024) {
+            throw new Error('Thumbnail file is too small to be valid')
+          }
+          if (thumbnailBlob.size > 50 * 1024 * 1024) {
+            throw new Error('Thumbnail file is too large')
+          }
+          
+          // Convert blob to File with proper MIME type
+          const mimeType = thumbnailBlob.type || contentType || 'image/jpeg'
           clonedThumbnailFile = new File(
             [thumbnailBlob], 
             'cloned-thumbnail.jpg', 
-            { type: thumbnailBlob.type || 'image/jpeg' }
+            { type: mimeType }
           )
           
           setLoadingProgress(50)
