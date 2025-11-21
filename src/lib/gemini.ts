@@ -192,8 +192,11 @@ Make it compelling and specific for creating a ${aspectRatio} ${style} thumbnail
 
   /**
    * Map aspect ratio to Gemini API format
+   * Trims whitespace to handle mobile FormData issues
    */
   private mapAspectRatio(aspectRatio: string): string {
+    // Trim whitespace to handle mobile FormData issues
+    const trimmed = aspectRatio?.trim() || '16:9'
     const mapping: { [key: string]: string } = {
       '16:9': '16:9',
       '1:1': '1:1',
@@ -201,7 +204,12 @@ Make it compelling and specific for creating a ${aspectRatio} ${style} thumbnail
       '9:16': '9:16',
       '21:9': '21:9'
     }
-    return mapping[aspectRatio] || '16:9'
+    const mapped = mapping[trimmed]
+    if (!mapped) {
+      console.warn(`Invalid aspect ratio received: "${trimmed}", defaulting to 16:9`)
+      return '16:9'
+    }
+    return mapped
   }
 
   /**

@@ -22,15 +22,16 @@ export async function POST(request: NextRequest) {
     }
 
     const formData = await request.formData()
-    const prompt = formData.get('prompt') as string
-    const style = formData.get('style') as string
-    const aspectRatio = formData.get('aspectRatio') as string
-    const size = formData.get('size') as string
-    const quality = formData.get('quality') as string
+    // Trim all string values to handle mobile FormData whitespace issues
+    const prompt = (formData.get('prompt') as string)?.trim() || ''
+    const style = (formData.get('style') as string)?.trim() || ''
+    const aspectRatio = (formData.get('aspectRatio') as string)?.trim() || ''
+    const size = (formData.get('size') as string)?.trim() || ''
+    const quality = (formData.get('quality') as string)?.trim() || ''
     const images = formData.getAll('images') as File[]
 
     // Validate required fields
-    if (!prompt || typeof prompt !== 'string') {
+    if (!prompt || typeof prompt !== 'string' || prompt.length === 0) {
       return NextResponse.json(
         { error: 'Prompt is required and must be a string' },
         { status: 400 }
@@ -43,14 +44,19 @@ export async function POST(request: NextRequest) {
     const validSizes = ['small', 'medium', 'large']
     const validQualities = ['standard', 'high']
 
-    if (style && !validStyles.includes(style)) {
+    // Normalize and validate style
+    const normalizedStyle = style || 'professional'
+    if (normalizedStyle && !validStyles.includes(normalizedStyle)) {
       return NextResponse.json(
         { error: 'Invalid style. Must be one of: ' + validStyles.join(', ') },
         { status: 400 }
       )
     }
 
-    if (aspectRatio && !validAspectRatios.includes(aspectRatio)) {
+    // Normalize and validate aspect ratio (critical for mobile compatibility)
+    const normalizedAspectRatio = aspectRatio || '16:9'
+    if (normalizedAspectRatio && !validAspectRatios.includes(normalizedAspectRatio)) {
+      console.error('Invalid aspect ratio received:', JSON.stringify(normalizedAspectRatio), 'Length:', normalizedAspectRatio.length)
       return NextResponse.json(
         { error: 'Invalid aspect ratio. Must be one of: ' + validAspectRatios.join(', ') },
         { status: 400 }
@@ -125,15 +131,26 @@ ${prompt}
 The user has uploaded ${images.length} reference image(s) containing faces that MUST be preserved and featured prominently in the thumbnail.`
     }
 
+    // Ensure all values are properly normalized before passing to Gemini API
     const options: ImageGenerationOptions = {
-      prompt: finalPrompt,
-      style: (style as 'realistic' | 'artistic' | 'minimalist' | 'vibrant' | 'professional') || 'professional',
-      aspectRatio: (aspectRatio as '16:9' | '1:1' | '4:3' | '9:16' | '21:9') || '16:9',
-      size: (size as 'small' | 'medium' | 'large') || 'medium',
-      quality: (quality as 'standard' | 'high') || 'high',
+      prompt: finalPrompt.trim(),
+      style: (normalizedStyle as 'realistic' | 'artistic' | 'minimalist' | 'vibrant' | 'professional') || 'professional',
+      aspectRatio: (normalizedAspectRatio as '16:9' | '1:1' | '4:3' | '9:16' | '21:9') || '16:9',
+      size: ((size || 'medium') as 'small' | 'medium' | 'large'),
+      quality: ((quality || 'high') as 'standard' | 'high'),
       imageData: imageData,
       userId: session.user.id
     }
+
+    // Log the exact values being sent to help debug mobile issues
+    console.log('Generating image with options:', {
+      promptLength: options.prompt.length,
+      style: options.style,
+      aspectRatio: options.aspectRatio,
+      aspectRatioLength: options.aspectRatio.length,
+      size: options.size,
+      quality: options.quality
+    })
 
     const result = await geminiImageGenerator.generateImage(options)
 
