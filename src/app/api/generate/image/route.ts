@@ -147,7 +147,7 @@ The user has uploaded ${images.length} reference image(s) containing faces that 
       promptLength: options.prompt.length,
       style: options.style,
       aspectRatio: options.aspectRatio,
-      aspectRatioLength: options.aspectRatio.length,
+      aspectRatioLength: options.aspectRatio?.length || 0,
       size: options.size,
       quality: options.quality
     })
