@@ -5,6 +5,8 @@ import { Navbar } from '@/components/Navbar'
 import { useToast } from '@/components/Toast'
 import { Copy, Search, Clock, TrendingUp, Sparkles, Eye, Maximize2, X, FileText, BookOpen } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { FullscreenImagePreview } from '@/components/FullscreenImagePreview'
 
 interface PromptLibraryItem {
   id: string
@@ -30,7 +32,9 @@ export default function PromptLibraryPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
   const [selectedPrompt, setSelectedPrompt] = useState<PromptLibraryItem | null>(null)
+  const [fullscreenImage, setFullscreenImage] = useState<PromptLibraryItem | null>(null)
   const { showToast, ToastContainer } = useToast()
+  const router = useRouter()
 
   // Debounce search query
   useEffect(() => {
@@ -152,6 +156,14 @@ export default function PromptLibraryPage() {
       return `data:image/jpeg;base64,${item.thumbnail_base64}`
     }
     return ''
+  }
+
+  const handleFullscreenPreview = (prompt: PromptLibraryItem) => {
+    setFullscreenImage(prompt)
+  }
+
+  const closeFullscreenPreview = () => {
+    setFullscreenImage(null)
   }
 
   const truncatePrompt = (prompt: string, maxLength: number = 150) => {
@@ -295,18 +307,18 @@ export default function PromptLibraryPage() {
                     <img
                       src={getThumbnailUrl(prompt)}
                       alt="Thumbnail"
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
+                      onClick={() => handleFullscreenPreview(prompt)}
                       onError={(e) => {
                         // Fallback if image fails to load
                         e.currentTarget.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect fill="%23e5e7eb" width="400" height="300"/><text x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%239ca3af" font-family="sans-serif" font-size="24">Image not available</text></svg>'
                       }}
                     />
-                    <div className="absolute top-2 right-2 flex items-center gap-1 px-2 py-1 rounded-full bg-black/60 backdrop-blur-sm text-white text-xs">
-                      <Eye className="h-3 w-3" />
-                      <span>{prompt.view_count}</span>
-                    </div>
                     <button
-                      onClick={() => setSelectedPrompt(prompt)}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setSelectedPrompt(prompt)
+                      }}
                       className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100"
                     >
                       <Maximize2 className="h-8 w-8 text-white" />
@@ -331,7 +343,7 @@ export default function PromptLibraryPage() {
                     </button>
                     <button
                       onClick={() => {
-                        setSelectedPrompt(prompt)
+                        handleFullscreenPreview(prompt)
                       }}
                       className="btn btn-outline btn-sm flex items-center justify-center gap-2"
                     >
@@ -428,20 +440,34 @@ export default function PromptLibraryPage() {
                   <Copy className="h-6 w-6" />
                   Copy Prompt
                 </button>
-                <Link
-                  href="/generate?mode=create"
+                <button
                   onClick={() => {
                     sessionStorage.setItem('savedPrompt', selectedPrompt.extracted_prompt)
+                    router.push('/generate?mode=create')
                   }}
                   className="flex-1 btn btn-primary btn-lg flex items-center justify-center gap-3 py-4 text-base font-semibold"
                 >
                   <Sparkles className="h-6 w-6" />
                   Use This Prompt
-                </Link>
+                </button>
               </div>
             </div>
           </div>
         </div>
+      )}
+
+      {/* Fullscreen Preview */}
+      {fullscreenImage && (
+        <FullscreenImagePreview
+          isOpen={!!fullscreenImage}
+          onClose={closeFullscreenPreview}
+          imageUrl={getThumbnailUrl(fullscreenImage)}
+          imageAlt="Thumbnail preview"
+          showActions={false}
+          metadata={{
+            prompt: fullscreenImage.extracted_prompt
+          }}
+        />
       )}
     </div>
   )

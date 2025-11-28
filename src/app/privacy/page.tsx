@@ -239,8 +239,8 @@ export default function PrivacyPolicyPage() {
               </ul>
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed mt-3">
                 To exercise any of these rights, please contact us at{' '}
-                <Link href="mailto:privacy@yourthumbnail.com" className="text-green-600 hover:text-green-700 font-semibold">
-                  privacy@yourthumbnail.com
+                <Link href="mailto:minhajraza@yourthumbnail.com" className="text-green-600 hover:text-green-700 font-semibold">
+                  minhajraza@yourthumbnail.com
                 </Link>. We will respond within 30 days.
               </p>
             </div>
@@ -329,14 +329,14 @@ export default function PrivacyPolicyPage() {
                 <p className="text-sm sm:text-base text-gray-900 font-semibold mb-2">YourThumbnailAI - Data Protection Team</p>
                 <p className="text-sm sm:text-base text-gray-700">
                   Email:{' '}
-                  <Link href="mailto:privacy@yourthumbnail.com" className="text-green-600 hover:text-green-700 font-semibold">
-                    privacy@yourthumbnail.com
+                  <Link href="mailto:minhajraza@yourthumbnail.com" className="text-green-600 hover:text-green-700 font-semibold">
+                    minhajraza@yourthumbnail.com
                   </Link>
                 </p>
                 <p className="text-sm sm:text-base text-gray-700">
                   Support:{' '}
-                  <Link href="mailto:support@yourthumbnail.com" className="text-green-600 hover:text-green-700 font-semibold">
-                    support@yourthumbnail.com
+                  <Link href="mailto:minhajraza@yourthumbnail.com" className="text-green-600 hover:text-green-700 font-semibold">
+                    minhajraza@yourthumbnail.com
                   </Link>
                 </p>
                 <p className="text-sm sm:text-base text-gray-700 mt-2">

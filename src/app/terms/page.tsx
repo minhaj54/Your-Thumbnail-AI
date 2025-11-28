@@ -217,8 +217,8 @@ export default function TermsOfServicePage() {
             <div className="pl-9 space-y-3">
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                 <strong>Your Right to Terminate:</strong> You may cancel your account at any time through your account dashboard or by contacting us at{' '}
-                <Link href="mailto:support@yourthumbnail.com" className="text-primary-600 hover:text-primary-700 font-semibold">
-                  support@yourthumbnail.com
+                <Link href="mailto:minhajraza@yourthumbnail.com" className="text-primary-600 hover:text-primary-700 font-semibold">
+                  minhajraza@yourthumbnail.com
                 </Link>. Upon account cancellation, your access to the Service will be terminated, and any remaining credits will be forfeited unless otherwise required by applicable law.
               </p>
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
@@ -247,8 +247,8 @@ export default function TermsOfServicePage() {
               </p>
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                 Before filing any formal legal action, you agree to first attempt to resolve the dispute informally by contacting our support team at{' '}
-                <Link href="mailto:legal@yourthumbnail.com" className="text-primary-600 hover:text-primary-700 font-semibold">
-                  legal@yourthumbnail.com
+                <Link href="mailto:minhajraza@yourthumbnail.com" className="text-primary-600 hover:text-primary-700 font-semibold">
+                  minhajraza@yourthumbnail.com
                 </Link>.
               </p>
             </div>
@@ -305,14 +305,14 @@ export default function TermsOfServicePage() {
                 <p className="text-sm sm:text-base text-gray-900 font-semibold mb-2">YourThumbnailAI</p>
                 <p className="text-sm sm:text-base text-gray-700">
                   Email:{' '}
-                  <Link href="mailto:legal@yourthumbnail.com" className="text-primary-600 hover:text-primary-700 font-semibold">
-                    legal@yourthumbnail.com
+                  <Link href="mailto:minhajraza@yourthumbnail.com" className="text-primary-600 hover:text-primary-700 font-semibold">
+                    minhajraza@yourthumbnail.com
                   </Link>
                 </p>
                 <p className="text-sm sm:text-base text-gray-700">
                   Support:{' '}
-                  <Link href="mailto:support@yourthumbnail.com" className="text-primary-600 hover:text-primary-700 font-semibold">
-                    support@yourthumbnail.com
+                  <Link href="mailto:minhajraza@yourthumbnail.com" className="text-primary-600 hover:text-primary-700 font-semibold">
+                    minhajraza@yourthumbnail.com
                   </Link>
                 </p>
                 <p className="text-sm sm:text-base text-gray-700 mt-2">

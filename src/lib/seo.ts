@@ -52,7 +52,7 @@ export const structuredData = {
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'Customer Support',
-      email: 'support@yourthumbnail.com',
+      email: 'minhajraza@yourthumbnail.com',
       availableLanguage: 'English'
     }
   },

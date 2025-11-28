@@ -9,6 +9,7 @@ import { Download, Trash2, Plus, Image as ImageIcon, Calendar, Sparkles, Trendin
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useUserProfile, useGeneratedImages, usePaymentHistory } from '@/hooks/useCache'
+import { FullscreenImagePreview } from '@/components/FullscreenImagePreview'
 
 interface GeneratedImage {
   id: string
@@ -48,6 +49,7 @@ export default function DashboardPage() {
   
   const [activeFilter, setActiveFilter] = useState<'all' | 'today' | 'week'>('all')
   const [previewImage, setPreviewImage] = useState<GeneratedImage | null>(null)
+  const [fullscreenImage, setFullscreenImage] = useState<GeneratedImage | null>(null)
   const [activeTab, setActiveTab] = useState<'profile' | 'billing'>('profile')
   const [showEmail, setShowEmail] = useState(true)
   const { user, signOut } = useAuth()
@@ -139,6 +141,14 @@ export default function DashboardPage() {
 
   const closePreview = () => {
     setPreviewImage(null)
+  }
+
+  const handleFullscreenPreview = (image: GeneratedImage) => {
+    setFullscreenImage(image)
+  }
+
+  const closeFullscreenPreview = () => {
+    setFullscreenImage(null)
   }
 
   const getFilteredImages = () => {
@@ -354,7 +364,8 @@ export default function DashboardPage() {
                   <img
                     src={image.image_url}
                     alt={image.prompt}
-                    className="w-full h-56 object-cover"
+                    className="w-full h-56 object-cover cursor-pointer"
+                    onClick={() => handleFullscreenPreview(image)}
                   />
                   
                   {/* Overlay on Hover */}
@@ -855,6 +866,30 @@ export default function DashboardPage() {
             </div>
           </div>
         </div>
+
+        {/* Fullscreen Preview */}
+        {fullscreenImage && (
+          <FullscreenImagePreview
+            isOpen={!!fullscreenImage}
+            onClose={closeFullscreenPreview}
+            imageUrl={fullscreenImage.image_url}
+            imageAlt={fullscreenImage.prompt}
+            onDownload={() => {
+              handleDownload(fullscreenImage.image_url, fullscreenImage.prompt)
+            }}
+            onDelete={() => {
+              handleDelete(fullscreenImage.id)
+              closeFullscreenPreview()
+            }}
+            metadata={{
+              prompt: fullscreenImage.prompt,
+              style: fullscreenImage.style,
+              aspect_ratio: fullscreenImage.aspect_ratio,
+              size: fullscreenImage.size,
+              created_at: fullscreenImage.created_at
+            }}
+          />
+        )}
 
         {/* Toast Container */}
         <ToastContainer />

@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Sparkles, Download, RefreshCw, Wand2, Upload, X, Image as ImageIcon, Zap, Copy, Link as LinkIcon, Palette, Clock, CheckCircle2, Maximize2, Loader2, FileText, LogIn } from 'lucide-react'
+import { Sparkles, Download, RefreshCw, Wand2, Upload, X, Image as ImageIcon, Zap, Copy, Link as LinkIcon, Palette, Clock, CheckCircle2, Maximize2, Loader2, FileText, LogIn, CreditCard, ArrowRight } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 import { Navbar } from '@/components/Navbar'
+import { useToast } from '@/components/Toast'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
@@ -19,6 +20,7 @@ type GenerationMode = 'create' | 'clone' | 'analyzer' | 'extract'
 export default function GeneratePage() {
   const { user } = useAuth()
   const router = useRouter()
+  const { showToast, ToastContainer } = useToast()
   const [mode, setMode] = useState<GenerationMode>('create')
   const [prompt, setPrompt] = useState('')
   const [style, setStyle] = useState<ImageGenerationOptions['style']>('professional')
@@ -29,6 +31,7 @@ export default function GeneratePage() {
   const [isEnhancing, setIsEnhancing] = useState(false)
   const [generatedImages, setGeneratedImages] = useState<any[]>([])
   const [error, setError] = useState('')
+  const [showInsufficientCredits, setShowInsufficientCredits] = useState(false)
   const [loadingProgress, setLoadingProgress] = useState(0)
   const [loadingMessage, setLoadingMessage] = useState('')
   const [showAuthPrompt, setShowAuthPrompt] = useState(false)
@@ -51,32 +54,85 @@ export default function GeneratePage() {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const analyzerFileInputRef = useRef<HTMLInputElement>(null)
   const extractFileInputRef = useRef<HTMLInputElement>(null)
+  const pendingPromptRef = useRef<string | null>(null)
+  const insufficientCreditsRef = useRef<HTMLDivElement>(null)
 
   // Check for saved prompt from library on mount
   useEffect(() => {
-    const savedPrompt = sessionStorage.getItem('savedPrompt')
-    if (savedPrompt) {
-      setPrompt(savedPrompt)
-      setMode('create')
-      sessionStorage.removeItem('savedPrompt')
-    }
-    
-    // Check URL params for mode
     const urlParams = new URLSearchParams(window.location.search)
     const urlMode = urlParams.get('mode')
+    
+    // Check URL params for mode
     if (urlMode && ['create', 'clone', 'analyzer', 'extract'].includes(urlMode)) {
       setMode(urlMode as GenerationMode)
+    } else {
+      // Check if we have a saved prompt and need to switch to create mode
+      const savedPrompt = sessionStorage.getItem('savedPrompt')
+      if (savedPrompt) {
+        setMode('create')
+      }
     }
+    // Don't remove sessionStorage here - let the clear effect handle it
   }, [])
+  
+  // Set pending prompt after mode changes to create
+  useEffect(() => {
+    if (mode === 'create' && pendingPromptRef.current) {
+      // Use a longer timeout to ensure clear effect has run
+      const timeoutId = setTimeout(() => {
+        const promptToSet = pendingPromptRef.current
+        if (promptToSet) {
+          pendingPromptRef.current = null
+          setPrompt(promptToSet)
+        }
+      }, 500)
+      
+      return () => clearTimeout(timeoutId)
+    }
+  }, [mode])
 
+  // Track previous mode to detect mode changes
+  const prevModeRef = useRef<GenerationMode | null>(null)
+  const isInitialMountRef = useRef(true)
+  
   // Clear all fields when switching between modes
   useEffect(() => {
+    // Check for saved prompt in sessionStorage before clearing
+    const savedPrompt = sessionStorage.getItem('savedPrompt')
+    if (savedPrompt && mode === 'create') {
+      sessionStorage.removeItem('savedPrompt')
+      // Don't clear, and set the prompt after a short delay
+      setTimeout(() => {
+        setPrompt(savedPrompt)
+      }, 100)
+      prevModeRef.current = mode
+      return
+    }
+    
+    // On initial mount, don't clear if we have a pending prompt
+    if (isInitialMountRef.current) {
+      isInitialMountRef.current = false
+      if (pendingPromptRef.current) {
+        prevModeRef.current = mode
+        return
+      }
+    }
+    
+    // Don't clear prompt if:
+    // 1. We have a pending prompt to set
+    // 2. We're switching TO create mode (not FROM create mode)
+    const isSwitchingToCreate = mode === 'create' && prevModeRef.current !== 'create' && prevModeRef.current !== null
+    const shouldPreservePrompt = pendingPromptRef.current || isSwitchingToCreate
+    
     // Clear all form fields
-    setPrompt('')
+    if (!shouldPreservePrompt) {
+      setPrompt('')
+    }
     setUploadedImages([])
     setCloneUrl('')
     setGeneratedImages([])
     setError('')
+    setShowInsufficientCredits(false)
     setLoadingProgress(0)
     setLoadingMessage('')
     setPreviewImage(null)
@@ -96,7 +152,23 @@ export default function GeneratePage() {
     setSize('medium')
     setQuality('high')
     setGenerateVariants(false)
+    
+    // Update previous mode
+    prevModeRef.current = mode
   }, [mode]) // Run this effect whenever mode changes
+
+  // Scroll to insufficient credits message when it appears
+  useEffect(() => {
+    if (showInsufficientCredits && insufficientCreditsRef.current) {
+      // Small delay to ensure the element is rendered
+      setTimeout(() => {
+        insufficientCreditsRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        })
+      }, 100)
+    }
+  }, [showInsufficientCredits])
 
   // Image upload handlers
   const handleDragOver = (e: React.DragEvent) => {
@@ -166,6 +238,7 @@ export default function GeneratePage() {
 
     setIsGenerating(true)
     setError('')
+    setShowInsufficientCredits(false)
     setGeneratedImages([])
     setLoadingProgress(0)
     
@@ -372,6 +445,15 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
         setLoadingProgress(90)
         setLoadingMessage('Finalizing your cloned thumbnail...')
 
+        // Check for insufficient credits (402 status)
+        if (response.status === 402) {
+          const data = await response.json()
+          setShowInsufficientCredits(true)
+          setError('')
+          setIsGenerating(false)
+          return
+        }
+
         // Check if response is ok before parsing
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({ error: `Server error: ${response.status} ${response.statusText}` }))
@@ -460,18 +542,30 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
         setLoadingProgress(90)
         setLoadingMessage('Finalizing your thumbnail...')
 
+        // Check for insufficient credits (402 status)
+        if (response.status === 402) {
+          const data = await response.json()
+          setShowInsufficientCredits(true)
+          setError('')
+          setIsGenerating(false)
+          return
+        }
+
         const data = await response.json()
 
         if (data.success) {
           setLoadingProgress(100)
           setLoadingMessage('Your thumbnail is ready! ✨')
           setGeneratedImages([data.data])
+          setShowInsufficientCredits(false)
       } else {
         setError(data.error || 'Failed to generate image')
+        setShowInsufficientCredits(false)
         }
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to generate image')
+      setShowInsufficientCredits(false)
     } finally {
       setIsGenerating(false)
     }
@@ -678,18 +772,24 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
   const copyPromptToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text)
-      // You could show a toast notification here
+      showToast('Prompt copied to clipboard!', 'success')
     } catch (err) {
       console.error('Failed to copy:', err)
-      setError('Failed to copy prompt to clipboard')
+      showToast('Failed to copy prompt to clipboard', 'error')
     }
   }
 
   const useExtractedPrompt = () => {
     if (extractedPrompt) {
-      setPrompt(extractedPrompt)
+      const promptToUse = extractedPrompt
+      // Set pending prompt before mode change
+      pendingPromptRef.current = promptToUse
       setMode('create')
-      // Scroll to prompt input area
+      // Update URL to reflect create mode
+      const newUrl = new URL(window.location.href)
+      newUrl.searchParams.set('mode', 'create')
+      window.history.pushState({}, '', newUrl.toString())
+      // Scroll to prompt input area after a delay
       setTimeout(() => {
         const promptInput = document.querySelector('textarea[placeholder*="Describe your thumbnail"]')
         promptInput?.scrollIntoView({ behavior: 'smooth', block: 'center' })
@@ -1054,7 +1154,37 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
                     )}
                   </button>
 
-                  {error && (
+                  {showInsufficientCredits ? (
+                    <div ref={insufficientCreditsRef} className="mt-4 animate-fade-in">
+                      <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 border-2 border-amber-200 rounded-2xl p-6 sm:p-8 shadow-lg">
+                        <div className="flex flex-col items-center text-center space-y-4">
+                          {/* Icon */}
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg">
+                            <CreditCard className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
+                          </div>
+                          
+                          {/* Message */}
+                          <div className="space-y-2">
+                            <h3 className="text-lg sm:text-xl font-bold text-gray-900">
+                              Out of Credits! 🎨
+                            </h3>
+                            <p className="text-sm sm:text-base text-gray-600 max-w-md">
+                              You've used all your credits. Purchase more credits to continue generating amazing thumbnails!
+                            </p>
+                          </div>
+                          
+                          {/* Upgrade Button */}
+                          <Link
+                            href="/pricing"
+                            className="btn btn-primary btn-md sm:btn-lg mt-2 group"
+                          >
+                            <span>Upgrade Now</span>
+                            <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  ) : error && (
                     <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4 text-red-700 mt-4">
                       {error}
                     </div>
@@ -1512,7 +1642,37 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
                 )}
               </button>
 
-              {error && (
+              {showInsufficientCredits ? (
+                <div ref={insufficientCreditsRef} className="mt-4 animate-fade-in">
+                  <div className="bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 border-2 border-amber-200 rounded-2xl p-6 sm:p-8 shadow-lg">
+                    <div className="flex flex-col items-center text-center space-y-4">
+                      {/* Icon */}
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center shadow-lg">
+                        <CreditCard className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
+                      </div>
+                      
+                      {/* Message */}
+                      <div className="space-y-2">
+                        <h3 className="text-lg sm:text-xl font-bold text-gray-900">
+                          Out of Credits! 🎨
+                        </h3>
+                        <p className="text-sm sm:text-base text-gray-600 max-w-md">
+                          You've used all your credits. Purchase more credits to continue generating amazing thumbnails!
+                        </p>
+                      </div>
+                      
+                      {/* Upgrade Button */}
+                      <Link
+                        href="/pricing"
+                        className="btn btn-primary btn-md sm:btn-lg mt-2 group"
+                      >
+                        <span>Upgrade Now</span>
+                        <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ) : error && (
                 <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4 text-red-700 mt-4">
                   {error}
                 </div>
@@ -2681,6 +2841,9 @@ The reference thumbnail is provided as the FIRST image. ${uploadedImages.length 
           </div>
         </div>
       )}
+      
+      {/* Toast Container */}
+      <ToastContainer />
       </div>
   )
 }
