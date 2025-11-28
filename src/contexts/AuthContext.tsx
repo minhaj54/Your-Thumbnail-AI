@@ -82,10 +82,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       ? new URLSearchParams(window.location.search).get('redirectTo') || '/dashboard'
       : '/dashboard'
     
+    // Use NEXT_PUBLIC_APP_URL if available (for production), otherwise use window.location.origin
+    const baseUrl = typeof window !== 'undefined' 
+      ? (process.env.NEXT_PUBLIC_APP_URL || window.location.origin)
+      : (process.env.NEXT_PUBLIC_APP_URL || '')
+    
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${typeof window !== 'undefined' ? window.location.origin : ''}/auth/callback?redirectTo=${encodeURIComponent(redirectTo)}`,
+        redirectTo: `${baseUrl}/auth/callback?redirectTo=${encodeURIComponent(redirectTo)}`,
       },
     })
     return { error }

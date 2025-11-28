@@ -149,9 +149,32 @@ npm run dev
 
 For production, follow the same steps but:
 
-1. Add your production domain to **Authorized JavaScript Origins** in Google Cloud Console
-2. The redirect URI remains the same: `https://<your-project-ref>.supabase.co/auth/v1/callback`
-3. Make sure your production environment variables are set correctly
+1. **Add your production domain to Authorized JavaScript Origins** in Google Cloud Console:
+   ```
+   https://yourdomain.com
+   https://www.yourdomain.com  (if you use www)
+   ```
+
+2. **The redirect URI remains the same** (Supabase callback):
+   ```
+   https://<your-project-ref>.supabase.co/auth/v1/callback
+   ```
+
+3. **Set production environment variables** in your hosting platform (Vercel, Netlify, etc.):
+   ```env
+   NEXT_PUBLIC_APP_URL=https://yourdomain.com
+   ```
+   **Important:** 
+   - Use your production domain (not localhost)
+   - No trailing slash
+   - Must start with `https://`
+
+4. **Update Supabase Redirect URL Allowlist** (if required):
+   - Go to Supabase Dashboard → Authentication → URL Configuration
+   - Add your production callback URL: `https://yourdomain.com/auth/callback`
+   - This allows Supabase to redirect back to your production site
+
+5. **Rebuild and redeploy** your application after setting environment variables
 
 ## Summary
 
