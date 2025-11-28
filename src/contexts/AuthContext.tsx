@@ -11,6 +11,7 @@ interface AuthContextType {
   signUp: (email: string, password: string) => Promise<{ error: any }>
   signIn: (email: string, password: string) => Promise<{ error: any }>
   signInWithGoogle: () => Promise<{ error: any }>
+  resetPassword: (email: string) => Promise<{ error: any }>
   signOut: () => Promise<void>
 }
 
@@ -82,16 +83,54 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       ? new URLSearchParams(window.location.search).get('redirectTo') || '/dashboard'
       : '/dashboard'
     
-    // Use NEXT_PUBLIC_APP_URL if available (for production), otherwise use window.location.origin
-    const baseUrl = typeof window !== 'undefined' 
-      ? (process.env.NEXT_PUBLIC_APP_URL || window.location.origin)
-      : (process.env.NEXT_PUBLIC_APP_URL || '')
+    // Determine the base URL for redirect
+    // Priority: 1. window.location.origin (most reliable), 2. NEXT_PUBLIC_APP_URL, 3. fallback
+    let baseUrl = ''
+    if (typeof window !== 'undefined') {
+      // Always use window.location.origin in browser - it's the actual current URL
+      baseUrl = window.location.origin
+      
+      // Log for debugging (remove in production if needed)
+      if (process.env.NODE_ENV === 'development') {
+        console.log('OAuth redirect URL:', `${baseUrl}/auth/callback?redirectTo=${encodeURIComponent(redirectTo)}`)
+      }
+    } else {
+      // Server-side fallback
+      baseUrl = process.env.NEXT_PUBLIC_APP_URL || ''
+    }
+    
+    if (!baseUrl) {
+      console.error('No base URL available for OAuth redirect')
+      return { error: { message: 'Configuration error: No base URL available' } }
+    }
     
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
         redirectTo: `${baseUrl}/auth/callback?redirectTo=${encodeURIComponent(redirectTo)}`,
       },
+    })
+    return { error }
+  }
+
+  const resetPassword = async (email: string) => {
+    // Determine the base URL for redirect
+    let baseUrl = ''
+    if (typeof window !== 'undefined') {
+      baseUrl = window.location.origin
+    } else {
+      baseUrl = process.env.NEXT_PUBLIC_APP_URL || ''
+    }
+    
+    if (!baseUrl) {
+      console.error('No base URL available for password reset redirect')
+      return { error: { message: 'Configuration error: No base URL available' } }
+    }
+    
+    const redirectTo = `${baseUrl}/auth/reset-password`
+    
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo,
     })
     return { error }
   }
@@ -107,6 +146,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signUp,
     signIn,
     signInWithGoogle,
+    resetPassword,
     signOut,
   }
 

@@ -4,6 +4,8 @@
 
 After signing up/signing in with Google on your deployed site, you're being redirected to `localhost:3000` instead of your production URL.
 
+**Common symptom:** You see a URL like `http://localhost:3000/?code=...` in your production site.
+
 ## Solution
 
 ### Step 1: Set Production Environment Variable
@@ -11,7 +13,7 @@ After signing up/signing in with Google on your deployed site, you're being redi
 In your hosting platform (Vercel, Netlify, Railway, etc.), add or update the environment variable:
 
 ```env
-NEXT_PUBLIC_APP_URL=https://yourdomain.com
+NEXT_PUBLIC_APP_URL=https://yourthumbnail.com
 ```
 
 **Important:**
@@ -60,16 +62,23 @@ When `NEXT_PUBLIC_APP_URL` is not set in production, the code falls back to `win
 
 ## Additional Checks
 
-### Supabase Redirect URL Configuration
+### Supabase Redirect URL Configuration (CRITICAL)
 
-If the issue persists, check Supabase Dashboard:
+**This is likely the main issue!** Supabase Dashboard might have localhost configured:
 
-1. Go to **Authentication** → **URL Configuration**
-2. Under **Redirect URLs**, make sure your production callback URL is allowed:
-   ```
-   https://yourdomain.com/auth/callback
-   ```
-3. If it's not listed, add it and save
+1. Go to [Supabase Dashboard](https://app.supabase.com/)
+2. Select your project
+3. Go to **Authentication** → **URL Configuration**
+4. Check the **Site URL** field:
+   - ❌ **WRONG:** `http://localhost:3000`
+   - ✅ **CORRECT:** `https://yourdomain.com` (your production URL)
+5. Under **Redirect URLs**, check the list:
+   - Remove `http://localhost:3000/auth/callback` if it's there
+   - Add your production callback URL: `https://yourdomain.com/auth/callback`
+   - Make sure localhost URLs are **NOT** in the list for production
+6. Click **Save**
+
+**Important:** The Site URL is used as a fallback redirect URL. If it's set to localhost, Supabase will redirect there even if you pass a different URL in the code.
 
 ### Google Cloud Console
 
@@ -86,11 +95,12 @@ Make sure your production domain is in **Authorized JavaScript Origins**:
 
 ## Quick Checklist
 
-- [ ] `NEXT_PUBLIC_APP_URL` is set in production environment variables
-- [ ] Value is `https://yourdomain.com` (no trailing slash)
-- [ ] Application has been rebuilt/redeployed after setting the variable
+- [ ] **Supabase Site URL** is set to your production domain (NOT localhost)
+- [ ] **Supabase Redirect URLs** includes `https://yourdomain.com/auth/callback`
+- [ ] **Supabase Redirect URLs** does NOT include localhost URLs
+- [ ] `NEXT_PUBLIC_APP_URL` is set in production environment variables (optional, code uses window.location.origin)
+- [ ] Application has been rebuilt/redeployed after any changes
 - [ ] Production domain is in Google Cloud Console Authorized JavaScript Origins
-- [ ] Production callback URL is in Supabase Redirect URLs (if required)
 
 ## Still Not Working?
 
