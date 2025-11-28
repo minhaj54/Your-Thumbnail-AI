@@ -74,7 +74,6 @@ export function FullscreenImagePreview({
           src={imageUrl}
           alt={imageAlt}
           className="max-w-full max-h-[95vh] object-contain rounded-lg shadow-2xl"
-          style={{ imageRendering: 'high-quality' }}
         />
 
         {/* Metadata Badges */}
